@@ -39,6 +39,27 @@ public class RobotRover
 
 		System.out.println("Done");
 	}
+	
+	// Same as above, with ultrasonic sensor
+	public void avoidObstaclesUltrasonic()
+	{
+		while (Button.readButtons() != Button.ID_ESCAPE)
+		{
+			moveForwardUntilNearObject();
+			
+			sleep(1);
+	
+			moveBackward(1);
+	
+			turnLeft();
+	
+			moveForward(1);
+	
+			turnRight();
+		}
+	
+		System.out.println("Done");
+	}
 
 	// Pause the robot.
 	private void sleep(double time)
@@ -92,6 +113,20 @@ public class RobotRover
 		while (!t2.isPressed() && !t3.isPressed())
 			Thread.yield();
 
+		stop();
+	}
+	
+	// Drive forward until an object gets close
+	public void moveForwardUntilNearObject()
+	{
+		
+		UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S4);
+	
+		moveForward(-1);
+	
+		while (sonic.getDistance() > 30)
+			Thread.yield();
+	
 		stop();
 	}
 
