@@ -1,3 +1,5 @@
+// This program follows a black line while moving clockwise
+
 import lejos.nxt.*;
 
 public class LineFollower

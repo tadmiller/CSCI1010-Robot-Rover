@@ -22,6 +22,7 @@ public class RobotRover
 	// turn left, drive forward again, then turn right and repeat.
 	public void avoidObstacles()
 	{
+		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
 		{
 			moveForwardUntilPressed();
@@ -40,9 +41,10 @@ public class RobotRover
 		System.out.println("Done");
 	}
 	
-	// Same as above, with ultrasonic sensor
+	// Same as avoidObstacles(), with ultrasonic sensor instead of touch
 	public void avoidObstaclesUltrasonic()
 	{
+		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
 		{
 			moveForwardUntilNearObject();
@@ -78,12 +80,14 @@ public class RobotRover
 		}
 	}
 
+	// Follow a black line with input from light sensor
 	public void followLine()
 	{
 		LightSensor t1 = new LightSensor(SensorPort.S1);
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
-
+		
+		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
 		{
 			nice++;
@@ -123,7 +127,8 @@ public class RobotRover
 		UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S4);
 	
 		moveForward(-1);
-	
+		
+		// While distance between nearest object and sensor is greater than 30 cm
 		while (sonic.getDistance() > 30)
 			Thread.yield();
 	
@@ -131,6 +136,7 @@ public class RobotRover
 	}
 
 	// Move forward for a specified amount of time (or infinite).
+	// Pass -1 as an argument for forward infinitely
 	public void moveForward(double time)
 	{
 		if (time == -1)
@@ -158,6 +164,7 @@ public class RobotRover
 	}
 
 	// Drive backwards for a specified amount of time (or infinite).
+	// Pass -1 as an argument for forward infinitely
 	public void moveBackward(double time)
 	{
 		if (time == -1)
@@ -186,7 +193,7 @@ public class RobotRover
 	}
 
 	// Slow down the motors then stop them.
-	// This is because the motors will not stop asynchronously.
+	// This is because the motors will not stop synchronously.
 	public void stop()
 	{
 		for (int i = Motor.B.getSpeed(); i > 0; i--)
