@@ -4,4 +4,7 @@ public class Intersection {
 		
 	}
 	
+   public int getTurn(){
+   
+   }
 }
