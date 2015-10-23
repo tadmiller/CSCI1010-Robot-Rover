@@ -11,6 +11,7 @@ import lejos.nxt.*;
 public class RobotRover
 {
 	private final int speed = 300;
+	private final double LINE_FORWARD_DURATION = 0.25;
 
 	// Empty constructor.
 	public RobotRover()
@@ -101,6 +102,39 @@ public class RobotRover
 		}
 
 		//System.out.println("Done");
+	}
+	
+	// Follow a line with color sensor until a color is hit
+	// Returns true if endpoint, false if intersection
+	public boolean followLineColor() {
+		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
+		
+		Motor.B.setSpeed(200);
+		Motor.C.setSpeed(200);
+		
+		// End program by pressing two middle buttons together
+		while (Button.readButtons() != Button.ID_ESCAPE)
+		{
+			ColorSensor.Color color = colorSensor.getColor();
+			
+			int colorId = color.getColor();
+			
+			if (colorId == SensorConstants.BLUE) {
+				return false;
+			} else if (colorId == SensorConstants.RED) {
+				return true;
+			}
+			
+			while (colorId != SensorConstants.BLACK) {
+				Motor.B.forward();
+			}
+			
+			Motor.B.stop(true);
+			
+			moveForward(LINE_FORWARD_DURATION);
+		}
+		
+		return true;
 	}
 
 	// Drive forward until we hit something.
