@@ -11,7 +11,6 @@ import lejos.nxt.*;
 public class RobotRover
 {
 	private final int speed = 300;
-	public int nice = 0;
 
 	// Empty constructor.
 	public RobotRover()
@@ -90,8 +89,6 @@ public class RobotRover
 		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
 		{
-			nice++;
-
 			while (t1.readValue() >= 24)
 				Motor.B.forward();
 
