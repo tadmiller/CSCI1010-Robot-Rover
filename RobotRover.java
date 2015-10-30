@@ -137,6 +137,57 @@ public class RobotRover
 		return true;
 	}
 
+	// black is 16 <=
+	// white is > 290, < 310
+	// wood is > 18, < 24
+	public double getColorSensorH()
+	{
+		return getColorSensorHSV()[0];
+	}
+
+	public double[] getColorSensorHSV()
+	{
+		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
+
+		ColorSensor.Color colors = colorSensor.getColor();
+		
+
+		double[] hsv = new double[3];
+		// read colors
+		int r = colors.getRed();
+		int b = colors.getBlue();
+		int g = colors.getGreen();
+		
+		double min = Math.min(r, Math.min(b,g));
+		double max = Math.max(r, Math.max(b, g));
+		double delta = max - min;
+		hsv[2] = max/255; //set v to max as a percentage
+		if (max != 0){
+			hsv[1] = delta/max;
+		}
+		else{ //r = b = g =0 
+			hsv[1] = 0; //s = 0;		// s = 0, v is undefined
+			hsv[0] = -1; //h = -1;
+			return hsv;
+		}
+		
+		if (r == max){
+			hsv[0] = (g-b)/delta; //h 
+		}
+		else{
+			if (g == max)
+				hsv[0] = 2 + (b - r)/delta; //h
+			else
+				hsv[0] = 4 + (r - g)/delta; //h
+		}
+		
+		hsv[0] *=60;	//degrees
+		if (hsv[0] < 0)
+			hsv[0] +=360;
+		
+		return hsv;
+	}
+
 	// Drive forward until we hit something.
 	public void moveForwardUntilPressed()
 	{
