@@ -1,3 +1,5 @@
+import lejos.nxt.*;
+
 public class readUltrasonic{
 
 
