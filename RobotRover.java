@@ -64,7 +64,7 @@ public class RobotRover
 	}
 
 	// Pause the robot.
-	private void sleep(double time)
+	public void sleep(double time)
 	{
 		System.out.println("Sleeping for " + time + " seconds.");
 
