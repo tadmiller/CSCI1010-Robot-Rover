@@ -62,6 +62,21 @@ public class RobotRover
 	
 		System.out.println("Done");
 	}
+   
+   public void readUltrasonic(){
+      while (Button.readButtons() != Button.ID_ESCAPE)
+		{
+      LCD.clear();
+      LCD.drawInt(sonic.getDistance(), 0, 3);
+	  //Button.waitForPress();
+	  try {
+		Thread.sleep(250);
+	  } catch (Exception e) {}
+    }
+		}
+	
+		System.out.println("Done");
+   }
 
 	// Pause the robot.
 	private void sleep(double time)
