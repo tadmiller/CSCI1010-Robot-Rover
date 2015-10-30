@@ -4,6 +4,8 @@ public class readUltrasonic{
 
 
 	public static void main(String [] args){
+		
+		UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
 	      while (Button.readButtons() != Button.ID_ESCAPE)
 			{
 	      		LCD.clear();
