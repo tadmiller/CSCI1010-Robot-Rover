@@ -4,9 +4,11 @@ import java.util.Stack;
 public class MazeRunner {
 	
 	Stack stack;
+	RobotRover robot;
 	
 	public MazeRunner() {
 		stack = new Stack();
+		robot = new RobotRover();
 	}
 	
 	public static void main(String[] args) {
@@ -14,7 +16,7 @@ public class MazeRunner {
 	}
 	
 	public void moveForwardUntilStopped() {
-		// Create a movement event
+		// Create a movement event, add to stack
 		// Keep a log of distance moved
 		
 		// End scenarios:
@@ -66,6 +68,8 @@ public class MazeRunner {
 		// Use movement data to estimate where it is going to be
 		
 		// Don't forget to turn around at the beginning and end
+		
+		// Remove the old event(s)
 		
 		// Then, call decideNextAction()
 	}
