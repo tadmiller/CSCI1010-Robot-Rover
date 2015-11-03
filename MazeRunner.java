@@ -1,4 +1,5 @@
 import java.util.Stack;
+// http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
 
 public class MazeRunner {
 	
