@@ -27,7 +27,19 @@ public class MazeRunner {
 		// Read ultrasonic sensor to get whether or not
 		// there is a wall on the left side
 		
-		// Call decideNextAction() 
+		// Call decideNextAction()
+      
+      UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
+      int distance=sonic.getDistance();
+      Event ultraEvent;
+      if(distance > 8 && distance <13){
+         ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
+      }
+      else{
+         ultraEvent = Event.newIntersection(Event.UNCHECKED);
+      } 
+      Stack.push(ultraEvent);  
+      decideNextAction();
 	}
 	
 	public void decideNextAction() {
