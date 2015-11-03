@@ -1,4 +1,5 @@
 import java.util.Stack;
+import lejos.nxt.*;
 // http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
 
 public class MazeRunner {
@@ -32,24 +33,43 @@ public class MazeRunner {
       UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
       int distance=sonic.getDistance();
       Event ultraEvent;
-      if(distance > 8 && distance <13){
+      if(distance > 8 && distance <13)
          ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
-      }
-      else{
+      else
          ultraEvent = Event.newIntersection(Event.UNCHECKED);
-      } 
-      Stack.push(ultraEvent);  
+
+      stack.push(ultraEvent);  
       decideNextAction();
 	}
 	
-	public void decideNextAction() {
+	public void decideNextAction()
+	{
 		// Decide what to do next
-		
 		// If stack is empty, call moveForwardUntilStopped()
 		
+		if (stack.isEmpty())
+			moveForwardUntilStopped();
+
+		Event e = stack.peek();
+
+		if (e.isIntersection()
+		{
+
+		}
+		else if (e.isTurn())
+		{
+
+		}
+		else if (e.isMovement())
+		{
+
+		}
+		else
+			reverseToLast();
+
 		// If at an intersection, determine which paths have not
 		// been checked and test them.
-		
+	
 		// If at an intersection and all options have been tried,
 		// call reverseToLast()
 		

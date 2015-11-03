@@ -1,4 +1,5 @@
-public class Event{
+public class Event
+    {
     
     /** EVENT TYPES **/
     public static final int INTERSECTION = 0;
@@ -29,10 +30,27 @@ public class Event{
     // Movement data
     public double estimatedDistance;
 
-    public Event() {
+    public Event()
+    {
+    }
+
+    public boolean isIntersection()
+    {
+        return eventType == INTERSECTION;
+    }
+
+    public boolean isTurn()
+    {
+        return eventType == TURN;
+    }
+
+    public boolean isMovement()
+    {
+        return eventType == MOVEMENT;
     }
     
-    public static Event newIntersection(int left, int front, int right) {
+    public static Event newIntersection(int left, int front, int right)
+    {
         Event e = new Event();
         e.eventType = INTERSECTION;
         
@@ -44,11 +62,13 @@ public class Event{
     }
     
     // New intersection with only left side
-    public static Event newIntersection(int left) {
+    public static Event newIntersection(int left) 
+    {
         return Event.newIntersection(left, UNCHECKED, UNCHECKED);
     }
     
-    public static Event newTurn(int direction) {
+    public static Event newTurn(int direction) 
+    {
         Event e = new Event();
         e.eventType = TURN;
         
@@ -57,7 +77,8 @@ public class Event{
         return e;
     }
     
-    public static Event newMovement(int distance) {
+    public static Event newMovement(int distance)
+    {
         Event e = new Event();
         e.eventType = MOVEMENT;
         
