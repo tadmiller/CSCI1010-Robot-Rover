@@ -43,6 +43,11 @@ public class Event{
         return e;
     }
     
+    // New intersection with only left side
+    public static Event newIntersection(int left) {
+        return Event.newIntersection(left, UNCHECKED, UNCHECKED);
+    }
+    
     public static Event newTurn(int direction) {
         Event e = new Event();
         e.eventType = TURN;
