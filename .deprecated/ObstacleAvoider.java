@@ -20,6 +20,6 @@ public class ObstacleAvoider
 
 		r.avoidObstacles();
 
-		Button.waitForAnyPress();
+		//Button.waitForAnyPress();
 	}
 }

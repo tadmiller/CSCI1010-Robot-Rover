@@ -62,21 +62,6 @@ public class RobotRover
 	
 		System.out.println("Done");
 	}
-   
-   public void readUltrasonic(){
-      while (Button.readButtons() != Button.ID_ESCAPE)
-		{
-      LCD.clear();
-      LCD.drawInt(sonic.getDistance(), 0, 3);
-	  //Button.waitForPress();
-	  try {
-		Thread.sleep(250);
-	  } catch (Exception e) {}
-    }
-		}
-	
-		System.out.println("Done");
-   }
 
 	// Pause the robot.
 	public void sleep(double time)
@@ -121,11 +106,14 @@ public class RobotRover
 	
 	// Follow a line with color sensor until a color is hit
 	// Returns true if endpoint, false if intersection
-	public boolean followLineColor() {
+	// Returns the duration of the 
+	public Object[] followLineColor() {
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
+		
+		double distanceTravelled = 0.0;
 		
 		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
@@ -135,9 +123,11 @@ public class RobotRover
 			int colorId = color.getColor();
 			
 			if (colorId == SensorConstants.BLUE) {
-				return false;
+				Object[] returnArray = {false, distanceTravelled};
+				return returnArray;
 			} else if (colorId == SensorConstants.RED) {
-				return true;
+				Object[] returnArray = {true, distanceTravelled};
+				return returnArray;
 			}
 			
 			while (colorId != SensorConstants.BLACK) {
@@ -146,10 +136,12 @@ public class RobotRover
 			
 			Motor.B.stop(true);
 			
+			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
 		}
 		
-		return true;
+		Object[] returnArray = {true, distanceTravelled};
+		return returnArray;
 	}
 
 	// black is 16 <=

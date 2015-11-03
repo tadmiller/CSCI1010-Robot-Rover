@@ -5,9 +5,11 @@ import lejos.nxt.*;
 public class MazeRunner {
 	
 	Stack stack;
+	RobotRover robot;
 	
 	public MazeRunner() {
 		stack = new Stack();
+		robot = new RobotRover();
 	}
 	
 	public static void main(String[] args) {
@@ -22,6 +24,10 @@ public class MazeRunner {
 		// If wall, call reverseToLast()
 		// If intersection, call processNewIntersection()
 		// If finish point, call reverseAll()
+      
+      Event moveEvent = Event.newMovement(0);
+      
+      
 	}
 	
 	public void processNewIntersection() {
@@ -37,7 +43,11 @@ public class MazeRunner {
          ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
       else
          ultraEvent = Event.newIntersection(Event.UNCHECKED);
+<<<<<<< HEAD
 
+=======
+      } 
+>>>>>>> origin/master
       stack.push(ultraEvent);  
       decideNextAction();
 	}
@@ -99,6 +109,16 @@ public class MazeRunner {
 		// RobotRover functions
 		
 		// Add a turn event to the stack
+      
+      Event newEvent;
+      newEvent = Event.newTurn(direction);
+      stack.push(newEvent);
+      if(direction==Event.TURN_LEFT){
+         robot.turnLeft();
+      }
+      else{
+        robot.turnRight();
+         }
 	}
 	
 }
