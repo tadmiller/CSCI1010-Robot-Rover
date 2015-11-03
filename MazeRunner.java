@@ -85,14 +85,16 @@ public class MazeRunner {
 		// RobotRover functions
 		
 		// Add a turn event to the stack
-      RobotRover turn;
+      
+      Event newEvent;
+      newEvent = Event.newTurn(direction);
+      stack.push(newEvent);
       if(direction==Event.TURN_LEFT){
-         turn=RobotRover.turnLeft();
+         robot.turnLeft();
       }
       else{
-         turn=RobotRover.turnRight();
-      }
-      stack.push(turn);   
+        robot.turnRight();
+         }
 	}
 	
 }
