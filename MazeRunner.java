@@ -2,21 +2,25 @@ import java.util.Stack;
 import lejos.nxt.*;
 // http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
 
-public class MazeRunner {
+public class MazeRunner
+{
 	
 	Stack stack;
 	RobotRover robot;
 	
-	public MazeRunner() {
+	public MazeRunner()
+	{
 		stack = new Stack();
 		robot = new RobotRover();
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		
 	}
 	
-	public void moveForwardUntilStopped() {
+	public void moveForwardUntilStopped()
+	{
 		// Create a movement event, add to stack
 		// Keep a log of distance moved
 		
@@ -25,31 +29,27 @@ public class MazeRunner {
 		// If intersection, call processNewIntersection()
 		// If finish point, call reverseAll()
       
-      Event moveEvent = Event.newMovement(0);
-      
-      
+		Event moveEvent = Event.newMovement(0);
 	}
 	
-	public void processNewIntersection() {
+	public void processNewIntersection()
+	{
 		// Read ultrasonic sensor to get whether or not
 		// there is a wall on the left side
 		
 		// Call decideNextAction()
       
-      UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
-      int distance=sonic.getDistance();
-      Event ultraEvent;
-      if(distance > 8 && distance <13)
-         ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
-      else
-         ultraEvent = Event.newIntersection(Event.UNCHECKED);
-<<<<<<< HEAD
+		UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
+		int distance=sonic.getDistance();
+		Event ultraEvent;
 
-=======
-      } 
->>>>>>> origin/master
-      stack.push(ultraEvent);  
-      decideNextAction();
+		if(distance > 8 && distance <13)
+			ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
+		else
+			ultraEvent = Event.newIntersection(Event.UNCHECKED);
+
+		stack.push(ultraEvent);  
+		decideNextAction();
 	}
 	
 	public void decideNextAction()
@@ -86,7 +86,8 @@ public class MazeRunner {
 		// If none of the above, throw exception
 	}
 	
-	public void reverseToLast() {
+	public void reverseToLast()
+	{
 		// Reverse the stack so that you arrive at the last intersection
 		
 		// Use movement data to estimate where it is going to be
@@ -98,11 +99,13 @@ public class MazeRunner {
 		// Then, call decideNextAction()
 	}
 	
-	public void reverseAll() {
+	public void reverseAll()
+	{
 		// Reverse the stack to return to the start
 	}
 	
-	public void makeTurn(int direction) {
+	public void makeTurn(int direction)
+	{
 		// Make a turn in the given direction
 		
 		// Use direction types defined in Event and
@@ -110,12 +113,14 @@ public class MazeRunner {
 		
 		// Add a turn event to the stack
       
-      Event newEvent;
-      newEvent = Event.newTurn(direction);
-      stack.push(newEvent);
-      if(direction==Event.TURN_LEFT){
-         robot.turnLeft();
-      }
+	Event newEvent;
+	newEvent = Event.newTurn(direction);
+	stack.push(newEvent);
+
+	if(direction==Event.TURN_LEFT)
+	{
+		robot.turnLeft();
+	}
       else{
         robot.turnRight();
          }
