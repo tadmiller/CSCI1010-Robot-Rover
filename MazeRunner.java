@@ -4,9 +4,11 @@ import java.util.Stack;
 public class MazeRunner {
 	
 	Stack stack;
+	RobotRover robot;
 	
 	public MazeRunner() {
 		stack = new Stack();
+		robot = new RobotRover();
 	}
 	
 	public static void main(String[] args) {
