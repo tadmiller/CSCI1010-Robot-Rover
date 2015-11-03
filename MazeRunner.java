@@ -21,6 +21,10 @@ public class MazeRunner {
 		// If wall, call reverseToLast()
 		// If intersection, call processNewIntersection()
 		// If finish point, call reverseAll()
+      
+      Event moveEvent = Event.newMovement(0);
+      
+      
 	}
 	
 	public void processNewIntersection() {
@@ -38,7 +42,7 @@ public class MazeRunner {
       else{
          ultraEvent = Event.newIntersection(Event.UNCHECKED);
       } 
-      Stack.push(ultraEvent);  
+      stack.push(ultraEvent);  
       decideNextAction();
 	}
 	
@@ -77,6 +81,14 @@ public class MazeRunner {
 		// RobotRover functions
 		
 		// Add a turn event to the stack
+      RobotRover turn;
+      if(direction==Event.TURN_LEFT){
+         turn=RobotRover.turnLeft();
+      }
+      else{
+         turn=RobotRover.turnRight();
+      }
+      stack.push(turn);   
 	}
 	
 }
