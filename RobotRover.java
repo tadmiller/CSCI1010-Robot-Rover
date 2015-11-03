@@ -136,6 +136,7 @@ public class RobotRover
 			
 			Motor.B.stop(true);
 			
+			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
 		}
 		
