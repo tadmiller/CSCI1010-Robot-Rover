@@ -107,7 +107,7 @@ public class RobotRover
 	// Follow a line with color sensor until a color is hit
 	// Returns true if endpoint, false if intersection
 	// Returns the duration of the 
-	public Object[] followLineColor() {
+	public Object[] followLineUntilStopped() {
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		
 		Motor.B.setSpeed(200);

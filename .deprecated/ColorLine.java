@@ -10,7 +10,7 @@ public class ColorLine
 
 		RobotRover r = new RobotRover();
 
-		r.followLineColor();
+		r.followLineUntilStopped();
 
 		//r.turnLeft();
 
