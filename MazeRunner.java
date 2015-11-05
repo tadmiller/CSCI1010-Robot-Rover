@@ -32,7 +32,7 @@ public class MazeRunner
       
 		Event moveEvent = Event.newMovement(0);
 		
-		MovementResult result = robot.followLineUntilStopped();
+		MovementResult result = robot.followLineUntilStopped(-1);
 		
 		moveEvent.estimatedDistance = result.duration;
 		
@@ -184,7 +184,7 @@ public class MazeRunner
 	// Use the estimate from the event to get a general distance
 	protected void reverseMovement(Event moveEvent)
 	{
-		robot.moveForward
+		robot.followLineUntilStopped(moveEvent.estimatedDistance);
 	}
 	
 	

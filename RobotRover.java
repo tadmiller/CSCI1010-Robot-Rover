@@ -106,7 +106,7 @@ public class RobotRover
 	
 	// Follow a line with color sensor until a color is hit
 	// Returns a result object (see below)
-	public MovementResult followLineUntilStopped(int maxDistance)
+	public MovementResult followLineUntilStopped(double maxDistance)
 	{
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
