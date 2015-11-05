@@ -107,8 +107,8 @@ public class RobotRover
 	// Follow a line with color sensor until a color is hit
 	// Returns a result object (see below)
 	public MovementResult followLineUntilStopped() {
-		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
-		TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
+		ColorSensor colorSensor = new ColorSensor(SensorPort.S2);
+		TouchSensor touchSensor = new TouchSensor(SensorPort.S1);
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
@@ -161,7 +161,7 @@ public class RobotRover
 
 	public double[] getColorSensorHSV()
 	{
-		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
+		ColorSensor colorSensor = new ColorSensor(SensorPort.S2);
 
 		ColorSensor.Color colors = colorSensor.getColor();
 		
