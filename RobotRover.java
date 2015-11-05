@@ -328,4 +328,9 @@ public class RobotRover
 
 		sleep(0.1);
 	}
+	
+	public void turnAround() {
+		turnLeft();
+		turnLeft();
+	}
 }
