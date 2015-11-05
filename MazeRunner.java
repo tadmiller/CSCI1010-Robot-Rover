@@ -16,7 +16,8 @@ public class MazeRunner
 	
 	public static void main(String[] args)
 	{
-		
+		MazeRunner m = new MazeRunner();
+		m.decideNextAction();
 	}
 	
 	public void moveForwardUntilStopped()
