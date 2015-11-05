@@ -106,7 +106,8 @@ public class RobotRover
 	
 	// Follow a line with color sensor until a color is hit
 	// Returns a result object (see below)
-	public MovementResult followLineUntilStopped() {
+	public MovementResult followLineUntilStopped(int maxDistance)
+	{
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
 		
@@ -118,7 +119,7 @@ public class RobotRover
 		boolean isWall = false;
 		
 		// End program by pressing two middle buttons together
-		while (Button.readButtons() != Button.ID_ESCAPE)
+		while (distanceTravelled < (maxDistance - 1) || maxDistance == -1)
 		{
 			if (touchSensor.isPressed())
 			{
