@@ -116,6 +116,22 @@ public class MazeRunner
 		// Remove the old event(s)
 		
 		// Then, call decideNextAction()
+      
+      while(true){
+         Event event = (Event) stack.pop();
+         if(event.eventType == Event.MOVEMENT){
+            reverseMovement(event);
+         }
+         else if(event.eventType == Event.TURN){
+            reverseTurn(event, true);
+         }
+         else{
+            robot.turnAround();
+            decideNextAction();
+            break;
+         }
+      }
+      
 	}
 	
 	public void reverseAll()
