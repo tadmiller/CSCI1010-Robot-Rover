@@ -1,3 +1,4 @@
+
 import java.util.Stack;
 import lejos.nxt.*;
 // http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
@@ -137,6 +138,8 @@ public class MazeRunner
 	public void reverseAll()
 	{
 		// Reverse the stack to return to the start
+      while (!stack.isEmpty())
+			reverseToLast();
 	}
 	
 	public void makeTurn(int direction)
@@ -191,6 +194,3 @@ public class MazeRunner
 		// Use the estimate from the event to get a general distance
 	}
 	
-	
-	
-}
