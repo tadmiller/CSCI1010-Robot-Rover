@@ -71,6 +71,8 @@ public class MazeRunner
 		decideNextAction();
 	}
 	
+	// Check for three paths; left, right, or forwards
+	// If one is open that hasn't been checked yet, send the robot in that direction
 	public void decideNextAction()
 	{
 		// Decide what to do next
@@ -83,15 +85,23 @@ public class MazeRunner
 
 		if (e.isIntersection())
 		{
-
-		}
-		else if (e.isTurn())
-		{
-
-		}
-		else if (e.isMovement())
-		{
-
+			if (e.leftStatus == Event.UNCHECKED)
+			{
+				robot.turnLeft();
+				e.leftStatus = Event.CHECK_IN_PROGRESS;
+			}
+			else if (e.rightStatus == Event.UNCHECKED)
+			{
+				robot.turnRight();
+				e.rightStatus = Event.CHECK_IN_PROGRESS;
+			}
+			else if (e.forwardStatus == Event.UNCHECKED)
+			{
+				moveForwardUntilStopped();
+				e.forwardStatus = Event.CHECK_IN_PROGRESS;
+			}
+			else
+				reverseToLast();
 		}
 		else
 			reverseToLast();
