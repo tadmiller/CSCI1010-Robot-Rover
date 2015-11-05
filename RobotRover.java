@@ -66,8 +66,6 @@ public class RobotRover
 	// Pause the robot.
 	public void sleep(double time)
 	{
-		System.out.println("Sleeping for " + time + " seconds.");
-
 		try
 		{
 			int t = (int)(time * 1000);
@@ -132,13 +130,13 @@ public class RobotRover
 			
 			int colorId = color.getColor();
 			
-			if (colorId == SensorConstants.BLUE) {
+			/*if (colorId == SensorConstants.BLUE) {
 				break;
 			} else if (colorId == SensorConstants.RED) {
 				// Should be changed to look for endpoint color
 				isEndpoint = true;
 				break;
-			}
+			}*/
 			
 			while (colorId != SensorConstants.BLACK) {
 				Motor.B.forward();
