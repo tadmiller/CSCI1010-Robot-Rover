@@ -146,4 +146,17 @@ public class MazeRunner
         }
 	}
 	
+	protected void reverseTurn(Event turnEvent, boolean andTurnAround)
+	{
+		// If standard, just turn in the same direction as the turn was
+		// If need to turn around, turn in the opposite direction
+	}
+	
+	protected void reverseMovement(Event moveEvent)
+	{
+		// Use the estimate from the event to get a general distance
+	}
+	
+	
+	
 }
