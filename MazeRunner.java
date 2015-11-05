@@ -30,6 +30,24 @@ public class MazeRunner
 		// If finish point, call reverseAll()
       
 		Event moveEvent = Event.newMovement(0);
+		
+		MovementResult result = robot.followLineUntilStopped();
+		
+		moveEvent.estimatedDistance = result.duration;
+		
+		stack.push(moveEvent);
+		
+		if (result.wall)
+		{
+			reverseToLast();
+		}
+		else if (result.endpoint)
+		{
+			reverseAll();
+		}
+		else {
+			processNewIntersection();
+		}
 	}
 	
 	public void processNewIntersection()
@@ -60,9 +78,9 @@ public class MazeRunner
 		if (stack.isEmpty())
 			moveForwardUntilStopped();
 
-		Event e = stack.peek();
+		Event e = (Event)stack.peek();
 
-		if (e.isIntersection()
+		if (e.isIntersection())
 		{
 
 		}
@@ -117,7 +135,7 @@ public class MazeRunner
 	newEvent = Event.newTurn(direction);
 	stack.push(newEvent);
 
-	if(direction==Event.TURN_LEFT)
+	if(direction==Event.LEFT_TURN)
 	{
 		robot.turnLeft();
 	}

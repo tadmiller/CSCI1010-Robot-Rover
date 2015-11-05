@@ -105,15 +105,16 @@ public class RobotRover
 	}
 	
 	// Follow a line with color sensor until a color is hit
-	// Returns true if endpoint, false if intersection
-	// Returns the duration of the 
-	public Object[] followLineUntilStopped() {
+	// Returns a result object (see below)
+	public MovementResult followLineUntilStopped() {
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
 		
 		double distanceTravelled = 0.0;
+		boolean isEndpoint = false;
+		boolean isWall = false;
 		
 		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
@@ -123,11 +124,11 @@ public class RobotRover
 			int colorId = color.getColor();
 			
 			if (colorId == SensorConstants.BLUE) {
-				Object[] returnArray = {false, distanceTravelled};
-				return returnArray;
+				break;
 			} else if (colorId == SensorConstants.RED) {
-				Object[] returnArray = {true, distanceTravelled};
-				return returnArray;
+				// Should be changed to look for endpoint color
+				isEndpoint = true;
+				break;
 			}
 			
 			while (colorId != SensorConstants.BLACK) {
@@ -140,8 +141,7 @@ public class RobotRover
 			moveForward(LINE_FORWARD_DURATION);
 		}
 		
-		Object[] returnArray = {true, distanceTravelled};
-		return returnArray;
+		return new MovementResult(isEndpoint, isWall, distanceTravelled);
 	}
 
 	// black is 16 <=
