@@ -206,6 +206,9 @@ public class MazeRunner
 		robot.followLineUntilStopped(moveEvent.estimatedDistance);
 	}
 	
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> origin/master
 }
