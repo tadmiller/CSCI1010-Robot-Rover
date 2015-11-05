@@ -110,6 +110,8 @@ public class RobotRover
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S2);
 		TouchSensor touchSensor = new TouchSensor(SensorPort.S1);
 		
+		colorSensor.setFloodlight(true);
+		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
 		
