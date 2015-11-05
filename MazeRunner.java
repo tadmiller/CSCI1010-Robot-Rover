@@ -132,17 +132,18 @@ public class MazeRunner
 		
 		// Add a turn event to the stack
       
-	Event newEvent;
-	newEvent = Event.newTurn(direction);
-	stack.push(newEvent);
+		Event newEvent;
+		newEvent = Event.newTurn(direction);
+		stack.push(newEvent);
 
-	if(direction==Event.LEFT_TURN)
-	{
-		robot.turnLeft();
-	}
-      else{
-        robot.turnRight();
-         }
+		if(direction==Event.LEFT_TURN)
+		{
+			robot.turnLeft();
+		}
+      	else
+      	{
+        	robot.turnRight();
+        }
 	}
 	
 }
