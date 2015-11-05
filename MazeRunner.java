@@ -71,6 +71,13 @@ public class MazeRunner
 		decideNextAction();
 	}
 	
+
+	// If at an intersection, determine which paths have not
+	// been checked and test them.
+	// If at an intersection and all options have been tried,
+	// call reverseToLast()
+	// If none of the above, throw exception
+	
 	// Check for three paths; left, right, or forwards
 	// If one is open that hasn't been checked yet, send the robot in that direction
 	public void decideNextAction()
@@ -105,14 +112,6 @@ public class MazeRunner
 		}
 		else
 			reverseToLast();
-
-		// If at an intersection, determine which paths have not
-		// been checked and test them.
-	
-		// If at an intersection and all options have been tried,
-		// call reverseToLast()
-		
-		// If none of the above, throw exception
 	}
 	
 	public void reverseToLast()
@@ -128,9 +127,11 @@ public class MazeRunner
 		// Then, call decideNextAction()
 	}
 	
+	// Reverse the stack to return to the start
 	public void reverseAll()
 	{
-		// Reverse the stack to return to the start
+		while (!stack.isEmpty())
+			reverseToLast();
 	}
 	
 	public void makeTurn(int direction)
@@ -180,9 +181,10 @@ public class MazeRunner
       }
 	}
 	
+	// Use the estimate from the event to get a general distance
 	protected void reverseMovement(Event moveEvent)
 	{
-		// Use the estimate from the event to get a general distance
+		
 	}
 	
 	
