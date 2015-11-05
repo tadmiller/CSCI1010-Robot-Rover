@@ -108,6 +108,7 @@ public class RobotRover
 	// Returns a result object (see below)
 	public MovementResult followLineUntilStopped() {
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
+		TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
@@ -119,6 +120,12 @@ public class RobotRover
 		// End program by pressing two middle buttons together
 		while (Button.readButtons() != Button.ID_ESCAPE)
 		{
+			if (touchSensor.isPressed())
+			{
+				isWall = true;
+				break;
+			}		
+			
 			ColorSensor.Color color = colorSensor.getColor();
 			
 			int colorId = color.getColor();
