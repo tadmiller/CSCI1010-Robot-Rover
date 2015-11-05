@@ -160,6 +160,24 @@ public class MazeRunner
 	{
 		// If standard, just turn in the same direction as the turn was
 		// If need to turn around, turn in the opposite direction
+      
+      if(andTurnAround){
+         if(turnEvent.turnType == Event.LEFT_TURN){
+            robot.turnRight();
+         }
+         else{
+            robot.turnLeft();
+         }
+      }
+      else{
+         if(turnEvent.turnType == Event.LEFT_TURN){
+            robot.turnLeft();
+         }
+         else{
+            robot.turnRight();
+         }
+
+      }
 	}
 	
 	protected void reverseMovement(Event moveEvent)
