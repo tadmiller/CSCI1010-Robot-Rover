@@ -175,16 +175,20 @@ public class RobotRover
 			while (hue > 80 || hue < 60) {
 				
 				if (getOffSide() == 1) {
-					Motor.C.setSpeed(200);
-					Motor.C.forward();
-					sleep(0.25);
-					Motor.C.stop(true);
+					while(getOffSide() == 1){
+                  Motor.C.setSpeed(200);
+					   Motor.C.forward();
+					   sleep(0.25);
+					   Motor.C.stop(true);
+                  }
 				} else {
-					Motor.B.setSpeed(200);
-					Motor.B.forward();
-					sleep(0.25);
-					Motor.B.stop(true);
-				}
+					while(getOffSide() != 1){
+                  Motor.B.setSpeed(200);
+   					Motor.B.forward();
+   					sleep(0.25);
+   					Motor.B.stop(true);
+                  }
+   				}
 				
 				hue = getColorSensorH();
 			}
