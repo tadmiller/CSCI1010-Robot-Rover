@@ -161,10 +161,13 @@ public class RobotRover
 			
 			double hue = getColorSensorH();
 			
-			if (hue > 180 && hue < 210) {
+			if (hue > 180 && hue < 210)
+			{
 				System.out.println("Blue detected");
 				break;
-			} else if (false) {
+			}
+			else if (false)
+			{
 				// Should be changed to look for endpoint color
 				isEndpoint = true;
 				break;
@@ -172,19 +175,24 @@ public class RobotRover
 			
 			
 			
-			while (hue > 80 || hue < 60) {
-				
-				if (getOffSide() == 1) {
+			while (hue > 80 || hue < 60)
+			{
+				if (getOffSide() == 1)
+				{
 					Motor.C.setSpeed(200);
 					Motor.C.forward();
 					sleep(0.25);
 					Motor.C.stop(true);
-				} else {
+				}
+				else if (getOffSide() == -1)
+				{
 					Motor.B.setSpeed(200);
 					Motor.B.forward();
 					sleep(0.25);
 					Motor.B.stop(true);
 				}
+				else
+					System.out.println("getOffSide() = 0. Something went wrong.");
 				
 				hue = getColorSensorH();
 			}
