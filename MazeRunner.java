@@ -85,10 +85,7 @@ public class MazeRunner
 		// Decide what to do next
 		// If stack is empty, call moveForwardUntilStopped()
 		
-		if (stack.isEmpty()) {
-			moveForwardUntilStopped();
-			return;
-		}
+		moveForwardUntilStopped();
 			
 		Event e = (Event)stack.peek();
 
