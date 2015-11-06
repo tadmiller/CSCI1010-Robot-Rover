@@ -127,6 +127,7 @@ public class RobotRover
 			//System.out.println("running");
 			if (touchSensor.isPressed())
 			{
+				System.out.println("Oops, hit a wall");
 				isWall = true;
 				break;
 			}		
