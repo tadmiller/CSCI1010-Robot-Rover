@@ -166,9 +166,9 @@ public class RobotRover
 				break;
 			}
 			
-			boolean shouldGoRight = true;
 			
-			while (getOffSide() != 0) {
+			
+			while (hue > 80 || hue < 60) {
 				
 				if (getOffSide() == 1) {
 					Motor.C.setSpeed(200);
@@ -181,7 +181,7 @@ public class RobotRover
 					sleep(0.25);
 					Motor.B.stop(true);
 				}
-				shouldGoRight = !shouldGoRight;
+				
 				hue = getColorSensorH();
 			}
 			
