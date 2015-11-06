@@ -63,7 +63,11 @@ public class RobotRover
 		System.out.println("Done");
 	}
 
-	// Pause the robot.
+	/**
+	 * Has the robot pause/wait for a given amount of time
+	 * 
+	 * @param The amount of time for the robot to wait, ie 0.1 = 1/10 of a second
+	 */
 	public void sleep(double time)
 	{
 		try
@@ -81,22 +85,22 @@ public class RobotRover
 	/**
 	 * Gets the side in which we are off/need to adjust to in order to stay straight
 	 * 
-	 * @return 1 if adjusting right, -1 if adjusting left, 0 if no adjustment needed/error
+	 * @return 1 = turn right, -1 = turn left, 0 if no adjustment needed/error
 	 */
 	public int getOffSide()
 	{
 		UltrasonicSensor usLeft = new UltrasonicSensor(SensorPort.S3); // left
 		UltrasonicSensor usRight = new UltrasonicSensor(SensorPort.S4); // right
 		
-		if ((usLeft.getDistance() < 10) && (usRight.getDistance() > 10))
-			return 1; // we should adjust to turn right
+//		System.out.println("Left is: " + usLeft.getDistance());
+//		System.out.println("Right is: " + usRight.getDistance());
 		
-		if ((usLeft.getDistance() > 10) && (usRight.getDistance() < 10))
+		if ((usLeft.getDistance() <= 10) && (usRight.getDistance() > 10))
+			return 1; // we should adjust to turn right
+		else if ((usLeft.getDistance() > 10) && (usRight.getDistance() <= 10))
 			return -1; // we should adjust to turn left
 		
-//		sonic.getDistance() > 30
-		
-		return 0; // error
+		return 0; // error/no adjustment needed
 	}
 
 	// Follow a black line with input from light sensor
