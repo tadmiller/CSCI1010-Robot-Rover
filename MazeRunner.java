@@ -96,6 +96,7 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
+				System.out.println("Turning here");
 				robot.turnLeft();
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
 			}

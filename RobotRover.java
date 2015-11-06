@@ -121,6 +121,7 @@ public class RobotRover
 		// End program by pressing two middle buttons together
 		while (distanceTravelled < (maxDistance - 1) || maxDistance == -1)
 		{
+			System.out.println("running");
 			if (touchSensor.isPressed())
 			{
 				isWall = true;
@@ -129,25 +130,42 @@ public class RobotRover
 			
 			ColorSensor.Color color = colorSensor.getColor();
 			
-			int colorId = color.getColor();
+			double hue = getColorSensorH();
 			
-			/*if (colorId == SensorConstants.BLUE) {
+			if (hue > 190 && hue < 210) {
 				break;
-			} else if (colorId == SensorConstants.RED) {
+			} else if (false) {
 				// Should be changed to look for endpoint color
 				isEndpoint = true;
 				break;
-			}*/
-			
-			while (colorId != SensorConstants.BLACK) {
-				Motor.B.forward();
 			}
 			
-			Motor.B.stop(true);
+			boolean shouldGoRight = true;
+			
+			while (hue > 80 || hue < 60) {
+				
+				if (shouldGoRight) {
+					Motor.C.setSpeed(200);
+					Motor.C.forward();
+					sleep(0.25);
+					Motor.C.stop(true);
+				} else {
+					Motor.B.setSpeed(200);
+					Motor.B.forward();
+					sleep(0.25);
+					Motor.B.stop(true);
+				}
+				shouldGoRight = !shouldGoRight;
+				hue = getColorSensorH();
+				System.out.println(hue);
+			}
+			
 			
 			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
 		}
+		
+		System.out.println(distanceTravelled);
 		
 		return new MovementResult(isEndpoint, isWall, distanceTravelled);
 	}
@@ -162,7 +180,7 @@ public class RobotRover
 
 	public double[] getColorSensorHSV()
 	{
-		ColorSensor colorSensor = new ColorSensor(SensorPort.S2);
+		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 
 		ColorSensor.Color colors = colorSensor.getColor();
 		
