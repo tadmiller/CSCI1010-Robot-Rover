@@ -63,7 +63,11 @@ public class RobotRover
 		System.out.println("Done");
 	}
 
-	// Pause the robot.
+	/**
+	 * Has the robot pause/wait for a given amount of time
+	 * 
+	 * @param The amount of time for the robot to wait, ie 0.1 = 1/10 of a second
+	 */
 	public void sleep(double time)
 	{
 		try
