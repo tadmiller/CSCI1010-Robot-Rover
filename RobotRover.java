@@ -175,19 +175,15 @@ public class RobotRover
 			while (hue > 80 || hue < 60) {
 				
 				if (getOffSide() == 1) {
-					while(getOffSide() == 1){
                   Motor.C.setSpeed(200);
 					   Motor.C.forward();
 					   sleep(0.25);
 					   Motor.C.stop(true);
-                  }
 				} else {
-					while(getOffSide() != 1){
                   Motor.B.setSpeed(200);
    					Motor.B.forward();
    					sleep(0.25);
    					Motor.B.stop(true);
-                  }
    				}
 				
 				hue = getColorSensorH();
@@ -202,6 +198,32 @@ public class RobotRover
 		
 		return new MovementResult(isEndpoint, isWall, distanceTravelled);
 	}
+   
+   public void followLineForReal(){
+    ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
+		Motor.B.setSpeed(200);
+		Motor.C.setSpeed(200);
+		
+      ColorSensor.Color color = colorSensor.getColor();
+			
+		double hue = getColorSensorH();
+		// End program by pressing two middle buttons together
+		while (Button.readButtons() != Button.ID_ESCAPE)
+		{
+
+      while (hue > 80 || hue < 60)
+				Motor.B.forward();
+
+			Motor.B.stop(true);
+
+			while (hue > 60 && hue < 80 )
+				Motor.C.forward();
+
+			Motor.C.stop(true);
+       }
+
+   }
+   
 
 	// black is 16 <=
 	// white is > 290, < 310
