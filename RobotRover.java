@@ -92,10 +92,12 @@ public class RobotRover
 		UltrasonicSensor usLeft = new UltrasonicSensor(SensorPort.S3); // left
 		UltrasonicSensor usRight = new UltrasonicSensor(SensorPort.S4); // right
 		
-		if ((usLeft.getDistance() < 10) && (usRight.getDistance() > 10))
-			return 1; // we should adjust to turn right
+		System.out.println("Left is: " + usLeft.getDistance());
+		System.out.println("Right is: " + usRight.getDistance());
 		
-		if ((usLeft.getDistance() > 10) && (usRight.getDistance() < 10))
+		if ((usLeft.getDistance() <= 10) && (usRight.getDistance() > 10))
+			return 1; // we should adjust to turn right
+		else if ((usLeft.getDistance() > 10) && (usRight.getDistance() <= 10))
 			return -1; // we should adjust to turn left
 		
 		return 0; // error/no adjustment needed
