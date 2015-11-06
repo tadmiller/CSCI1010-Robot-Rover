@@ -85,15 +85,15 @@ public class RobotRover
 	/**
 	 * Gets the side in which we are off/need to adjust to in order to stay straight
 	 * 
-	 * @return 1 if adjusting right, -1 if adjusting left, 0 if no adjustment needed/error
+	 * @return 1 = turn right, -1 = turn left, 0 if no adjustment needed/error
 	 */
 	public int getOffSide()
 	{
 		UltrasonicSensor usLeft = new UltrasonicSensor(SensorPort.S3); // left
 		UltrasonicSensor usRight = new UltrasonicSensor(SensorPort.S4); // right
 		
-		System.out.println("Left is: " + usLeft.getDistance());
-		System.out.println("Right is: " + usRight.getDistance());
+//		System.out.println("Left is: " + usLeft.getDistance());
+//		System.out.println("Right is: " + usRight.getDistance());
 		
 		if ((usLeft.getDistance() <= 10) && (usRight.getDistance() > 10))
 			return 1; // we should adjust to turn right
