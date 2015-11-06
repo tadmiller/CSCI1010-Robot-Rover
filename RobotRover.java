@@ -11,7 +11,7 @@ import lejos.nxt.*;
 public class RobotRover
 {
 	private final int speed = 300;
-	private final double LINE_FORWARD_DURATION = 0.25;
+	private final double LINE_FORWARD_DURATION = 0.1;
 
 	// Empty constructor.
 	public RobotRover()
@@ -118,10 +118,13 @@ public class RobotRover
 		boolean isEndpoint = false;
 		boolean isWall = false;
 		
+		distanceTravelled += LINE_FORWARD_DURATION;
+		moveForward(LINE_FORWARD_DURATION);
+		
 		// End program by pressing two middle buttons together
 		while (distanceTravelled < (maxDistance - 1) || maxDistance == -1)
 		{
-			System.out.println("running");
+			//System.out.println("running");
 			if (touchSensor.isPressed())
 			{
 				isWall = true;
@@ -132,7 +135,8 @@ public class RobotRover
 			
 			double hue = getColorSensorH();
 			
-			if (hue > 190 && hue < 210) {
+			if (hue > 180 && hue < 210) {
+				System.out.println("Blue detected");
 				break;
 			} else if (false) {
 				// Should be changed to look for endpoint color
@@ -157,7 +161,6 @@ public class RobotRover
 				}
 				shouldGoRight = !shouldGoRight;
 				hue = getColorSensorH();
-				System.out.println(hue);
 			}
 			
 			
@@ -165,7 +168,7 @@ public class RobotRover
 			moveForward(LINE_FORWARD_DURATION);
 		}
 		
-		System.out.println(distanceTravelled);
+		//System.out.println("Travelled: " + distanceTravelled);
 		
 		return new MovementResult(isEndpoint, isWall, distanceTravelled);
 	}
@@ -257,7 +260,7 @@ public class RobotRover
 		if (time == -1)
 			System.out.println("Going forward infinitely!");
 		else
-			System.out.println("Going forward for " + time + " seconds!");
+			//System.out.println("Going forward for " + time + " seconds!");
 
 		Motor.B.setSpeed(speed);
 		Motor.C.setSpeed(speed);

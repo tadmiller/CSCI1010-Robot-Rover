@@ -38,6 +38,8 @@ public class MazeRunner
 		
 		stack.push(moveEvent);
 		
+		System.out.println("wall:" +result.wall);
+		
 		if (result.wall)
 		{
 			reverseToLast();
@@ -61,13 +63,17 @@ public class MazeRunner
 		UltrasonicSensor sonic = new UltrasonicSensor(SensorPort.S3);
 		int distance=sonic.getDistance();
 		Event ultraEvent;
-
-		if(distance > 8 && distance <13)
+		System.out.println("Distance: "+distance);
+		if(distance > 8 && distance <13) 
+		{
 			ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
+			for (int i = 0; i < 10; i++) System.out.println("Wall detected");
+		}
 		else
 			ultraEvent = Event.newIntersection(Event.UNCHECKED);
 
-		stack.push(ultraEvent);  
+		stack.push(ultraEvent);
+		System.out.println("New intersection made" + ultraEvent.leftStatus);
 		decideNextAction();
 	}
 	
@@ -85,17 +91,19 @@ public class MazeRunner
 		// Decide what to do next
 		// If stack is empty, call moveForwardUntilStopped()
 		
-		moveForwardUntilStopped();
+		if (stack.isEmpty()) moveForwardUntilStopped();
 			
 		Event e = (Event)stack.peek();
 
 		if (e.isIntersection())
 		{
+			System.out.println("Making a decision at an intersection");
 			if (e.leftStatus == Event.UNCHECKED)
 			{
 				System.out.println("Turning here");
 				robot.turnLeft();
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
+				moveForwardUntilStopped();
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
@@ -125,6 +133,10 @@ public class MazeRunner
 		// Remove the old event(s)
 		
 		// Then, call decideNextAction()
+		
+		System.out.println("reversing");
+		
+		robot.turnAround();
       
       while(true)
       {
