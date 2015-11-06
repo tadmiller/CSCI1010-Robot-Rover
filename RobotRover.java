@@ -92,7 +92,7 @@ public class RobotRover
 			return 1; // we should adjust to turn right
 		
 		if ((usLeft.getDistance() > 10) && (usRight.getDistance() < 10))
-			return -1; // we should adjust to turn right
+			return -1; // we should adjust to turn left
 		
 //		sonic.getDistance() > 30
 		
@@ -168,9 +168,9 @@ public class RobotRover
 			
 			boolean shouldGoRight = true;
 			
-			while (hue > 80 || hue < 60) {
+			while (getOffSide() != 0) {
 				
-				if (shouldGoRight) {
+				if (getOffSide() == 1) {
 					Motor.C.setSpeed(200);
 					Motor.C.forward();
 					sleep(0.25);
