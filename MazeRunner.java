@@ -49,6 +49,7 @@ public class MazeRunner
 			reverseAll();
 		}
 		else {
+			System.out.println("Going to process new intersection");
 			processNewIntersection();
 		}
 	}
@@ -97,10 +98,8 @@ public class MazeRunner
 
 		if (e.isIntersection())
 		{
-			System.out.println("Making a decision at an intersection");
 			if (e.leftStatus == Event.UNCHECKED)
 			{
-				System.out.println("Turning here");
 				robot.turnLeft();
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
 				moveForwardUntilStopped();
