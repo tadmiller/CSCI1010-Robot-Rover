@@ -94,9 +94,7 @@ public class RobotRover
 		if ((usLeft.getDistance() > 10) && (usRight.getDistance() < 10))
 			return -1; // we should adjust to turn left
 		
-//		sonic.getDistance() > 30
-		
-		return 0; // error
+		return 0; // error/no adjustment needed
 	}
 
 	// Follow a black line with input from light sensor
