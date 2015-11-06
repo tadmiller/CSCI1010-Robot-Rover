@@ -194,7 +194,8 @@ public class RobotRover
 			moveForward(LINE_FORWARD_DURATION);
 		}
 		
-		//System.out.println("Travelled: " + distanceTravelled);
+		System.out.println("Travelled: " + distanceTravelled);
+		System.out.println("Wall:" + isWall);
 		
 		return new MovementResult(isEndpoint, isWall, distanceTravelled);
 	}
