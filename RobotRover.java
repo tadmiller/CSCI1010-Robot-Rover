@@ -112,7 +112,7 @@ public class RobotRover
 	{
 		boolean side = true; // left = true right = false
 		double hue = getColorSensorH();
-		int i = 1;
+		int i = 50;
 	
 		System.out.println("Looking for the line..");
 		
@@ -146,6 +146,7 @@ public class RobotRover
 			}
 			
 			i *= 2;
+			side = !side;
 		}
 	}
 
