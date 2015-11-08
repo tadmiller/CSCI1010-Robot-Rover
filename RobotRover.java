@@ -153,7 +153,9 @@ public class RobotRover
 			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
-			stop();
+			Motor.B.stop(true);
+			Motor.C.stop(true);
+			//stop();
 		}
 		
 		stop(); // stop
