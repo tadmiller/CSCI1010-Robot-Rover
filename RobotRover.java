@@ -156,6 +156,8 @@ public class RobotRover
 			Motor.B.stop(true);
 			Motor.C.stop(true);
 			//stop();
+			
+			hue = getColorSensorH();
 		}
 		
 		stop(); // stop
