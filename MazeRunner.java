@@ -102,17 +102,21 @@ public class MazeRunner
 			{
 				robot.turnLeft();
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
+				robot.moveForward(0.1);
 				moveForwardUntilStopped();
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
 				robot.turnRight();
 				e.rightStatus = Event.CHECK_IN_PROGRESS;
+				robot.moveForward(0.1);
+				moveForwardUntilStopped();
 			}
 			else if (e.forwardStatus == Event.UNCHECKED)
 			{
-				moveForwardUntilStopped();
 				e.forwardStatus = Event.CHECK_IN_PROGRESS;
+				robot.moveForward(0.1);
+				moveForwardUntilStopped();
 			}
 			else
 				reverseToLast();
