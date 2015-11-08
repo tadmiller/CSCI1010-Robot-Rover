@@ -121,7 +121,7 @@ public class RobotRover
 	
 		System.out.println("Looking for the line..");
 		
-		while (hue > 90 || hue < 60)
+		while (hue > BLACK_MAX || hue < BLACK_MIN)
 		{
 			System.out.println("i: " + i);
 			
@@ -138,13 +138,13 @@ public class RobotRover
 			
 			try
 			{
-				//for (int j = 0; j < i; j++)
-				//{
-					//if (hue < 80 && hue > 60)
-					//	break;
+				for (int j = 0; j < i; j++)
+				{
+					if (hue < BLACK_MAX && hue > BLACK_MIN)
+						break;
 					
-					Thread.sleep((int)i);
-				//}
+					Thread.sleep(j);
+				}
 			}
 
 			catch(InterruptedException ex)
