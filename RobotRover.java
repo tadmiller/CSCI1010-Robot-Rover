@@ -118,12 +118,9 @@ public class RobotRover
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
-	
-		System.out.println("Looking for the line..");
 		
 		while (hue > BLACK_MAX || hue < BLACK_MIN)
 		{
-			System.out.println("i: " + i);
 			
 			if (side)
 			{
