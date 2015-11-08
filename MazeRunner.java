@@ -164,6 +164,8 @@ public class MazeRunner
 			reverseToLast();
 	}
 	
+
+	
 	public void makeTurn(int direction)
 	{
 		// Make a turn in the given direction
