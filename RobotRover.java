@@ -105,8 +105,6 @@ public class RobotRover
 				break;
 			}
 			
-<<<<<<< HEAD
-			
 			
 			while (hue > 80 || hue < 60)
 			{
@@ -128,26 +126,54 @@ public class RobotRover
 					System.out.println("getOffSide() = 0. Something went wrong.");
 				
 				hue = getColorSensorH();
-=======
-			if (hue > 80 || hue < 60) {
-				 Motor.B.forward();
-				 Motor.B.stop(true);
-			 }
-			else if (hue > 60 && hue < 80 ) {
-				Motor.C.forward();
-				Motor.C.stop(true);
->>>>>>> origin/master
-			}
-
-		
-						
+			
+				if (hue > 80 || hue < 60)
+				{
+					 Motor.B.forward();
+					 Motor.B.stop(true);
+				 }
+				else if (hue > 60 && hue < 80 )
+				{
+					Motor.C.forward();
+					Motor.C.stop(true);
+				}			
 			//distanceTravelled += LINE_FORWARD_DURATION;
+			}
 		}
-		
 		System.out.println("Travelled: " + distanceTravelled);
 		System.out.println("Wall:" + isWall);
 		
 		return new MovementResult(isEndpoint, isWall, distanceTravelled);
+	}
+	
+	public void findLine()
+	{
+		boolean side = true; // left = true right = false
+		
+		for (int i = 0; i < 1000; i++)
+		{
+			for (int j = 0; j < i; j++)
+			{
+				if (side)
+				{
+					Motor.C.forward();
+					Motor.B.backward();
+				}
+				else
+				{
+					Motor.C.backward();
+					Motor.B.forward();
+				}
+				
+			}
+			
+			if (side)
+				Motor.C.stop(true);
+			else
+				Motor.B.stop(true);
+			
+			side = !side;
+		}
 	}
 
 	// black is 16 <=
