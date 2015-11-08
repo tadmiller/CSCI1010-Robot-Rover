@@ -136,13 +136,13 @@ public class RobotRover
 			
 			try
 			{
-				for (int j = 0; j < i; j++)
-				{
-					if (hue < 80 && hue > 60)
-						break;
+				//for (int j = 0; j < i; j++)
+				//{
+					//if (hue < 80 && hue > 60)
+					//	break;
 					
-					Thread.sleep(j);
-				}
+					Thread.sleep(i);
+				//}
 			}
 
 			catch(InterruptedException ex)
