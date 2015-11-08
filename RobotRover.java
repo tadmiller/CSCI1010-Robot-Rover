@@ -112,7 +112,7 @@ public class RobotRover
 	{
 		boolean side = true; // left = true right = false
 		double hue = getColorSensorH();
-		int i = 50;
+		int i = 1;
 		
 		Motor.B.setSpeed(400);
 		Motor.C.setSpeed(400);
