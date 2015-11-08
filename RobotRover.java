@@ -108,35 +108,38 @@ public class RobotRover
 			
 			while (hue > 80 || hue < 60)
 			{
-				if (getOffSide() == 1)
-				{
-					Motor.C.setSpeed(200);
-					Motor.C.forward();
-					sleep(0.25);
-					Motor.C.stop(true);
-				}
-				else if (getOffSide() == -1)
-				{
-					Motor.B.setSpeed(200);
-					Motor.B.forward();
-					sleep(0.25);
-					Motor.B.stop(true);
-				}
-				else
-					System.out.println("getOffSide() = 0. Something went wrong.");
+//				if (getOffSide() == 1)
+//				{
+//					Motor.C.setSpeed(200);
+//					Motor.C.forward();
+//					sleep(0.25);
+//					Motor.C.stop(true);
+//				}
+//				else if (getOffSide() == -1)
+//				{
+//					Motor.B.setSpeed(200);
+//					Motor.B.forward();
+//					sleep(0.25);
+//					Motor.B.stop(true);
+//				}
+//				else
+//					System.out.println("getOffSide() = 0. Something went wrong.");
+
 				
-				hue = getColorSensorH();
-			
-				if (hue > 80 || hue < 60)
-				{
-					 Motor.B.forward();
-					 Motor.B.stop(true);
-				 }
-				else if (hue > 60 && hue < 80 )
-				{
-					Motor.C.forward();
-					Motor.C.stop(true);
-				}			
+//				
+//				hue = getColorSensorH();
+//			
+//				if (hue > 80 || hue < 60)
+//				{
+//					 Motor.B.forward();
+//					 Motor.B.stop(true);
+//				 }
+//				else if (hue > 60 && hue < 80 )
+//				{
+//					Motor.C.forward();
+//					Motor.C.stop(true);
+//				}
+				findLine();
 			//distanceTravelled += LINE_FORWARD_DURATION;
 			}
 		}
@@ -149,28 +152,64 @@ public class RobotRover
 	public void findLine()
 	{
 		boolean side = true; // left = true right = false
+		double hue = getColorSensorH();
+		int i = 1;
+	
+		System.out.println("Looking for the line..");
 		
-		for (int i = 0; i < 1000; i++)
+		while (hue > 80 || hue < 60)
 		{
-			for (int j = 0; j < i; j++)
+			if (side)
 			{
-				if (side)
-				{
-					Motor.C.forward();
-					Motor.B.backward();
-				}
-				else
-				{
-					Motor.C.backward();
-					Motor.B.forward();
-				}
-				
+				Motor.C.forward();
+				Motor.B.backward();
+			}
+			else
+			{
+				Motor.C.backward();
+				Motor.B.forward();
 			}
 			
-			stop();
+			try
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if (hue < 80 && hue > 60)
+						break;
+					
+					Thread.sleep(j);
+				}
+			}
+
+			catch(InterruptedException ex)
+			{
+				Thread.currentThread().interrupt();
+			}
 			
-			side = !side;
+			i *= 2;
 		}
+			
+//		for (int i = 0; i < 1000; i++)
+//		{
+//			for (int j = 0; j < i; j++)
+//			{
+//				if (side)
+//				{
+//					Motor.C.forward();
+//					Motor.B.backward();
+//				}
+//				else
+//				{
+//					Motor.C.backward();
+//					Motor.B.forward();
+//				}
+//				
+//			}
+//			
+//			stop();
+//			
+//			side = !side;
+//		}
 	}
 
 	// black is 16 <=
