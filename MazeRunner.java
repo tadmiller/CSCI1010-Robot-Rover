@@ -68,13 +68,13 @@ public class MazeRunner
 		if(distance > 8 && distance <13) 
 		{
 			ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
-			for (int i = 0; i < 10; i++) System.out.println("Wall detected");
+			System.out.println("Wall detected");
 		}
 		else
 			ultraEvent = Event.newIntersection(Event.UNCHECKED);
 
 		stack.push(ultraEvent);
-		System.out.println("New intersection made" + ultraEvent.leftStatus);
+		System.out.println("New intersection made" + ultraEvent.leftStatus + "" + ultraEvent.eventType);
 		decideNextAction();
 	}
 	
@@ -100,14 +100,14 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
-				robot.turnLeft();
+				makeTurn(Event.LEFT_TURN);
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
 				robot.moveForward(0.3);
 				moveForwardUntilStopped();
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
-				robot.turnRight();
+				makeTurn(Event.RIGHT_TURN);
 				e.rightStatus = Event.CHECK_IN_PROGRESS;
 				robot.moveForward(0.3);
 				moveForwardUntilStopped();
@@ -158,18 +158,21 @@ public class MazeRunner
          if(event.eventType == Event.MOVEMENT)
          {
             reverseMovement(event);
-			robot.turnAround();
          }
          else if(event.eventType == Event.TURN)
          {
-            reverseTurn(event, true);
+            reverseTurn(event, false);
          }
          else
          {
-            decideNextAction();
+			System.out.println("Breaking");
+			robot.sleep(10);
             break;
          }
       }
+	  
+	  robot.turnAround();
+	  decideNextAction();
 	}
 	
 	// Reverse the stack to return to the start
