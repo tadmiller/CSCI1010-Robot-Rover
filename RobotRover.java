@@ -122,6 +122,7 @@ public class RobotRover
 		while (hue > 80 || hue < 60)
 		{
 			System.out.println("i: " + i);
+			
 			if (side)
 			{
 				Motor.C.forward();
