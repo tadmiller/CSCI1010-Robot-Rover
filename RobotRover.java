@@ -148,11 +148,11 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 2;
-			side = !side;
+			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite directio n
+			side = !side; // change the side we scan on
 		}
 		
-		stop();
+		stop(); // stop
 	}
 
 	// black is 16 <=
