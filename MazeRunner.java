@@ -100,27 +100,38 @@ public class MazeRunner
 			{
 				robot.turnLeft();
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
-				robot.moveForward(0.1);
+				robot.moveForward(0.3);
 				moveForwardUntilStopped();
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
 				robot.turnRight();
 				e.rightStatus = Event.CHECK_IN_PROGRESS;
-				robot.moveForward(0.1);
+				robot.moveForward(0.3);
 				moveForwardUntilStopped();
 			}
 			else if (e.forwardStatus == Event.UNCHECKED)
 			{
 				e.forwardStatus = Event.CHECK_IN_PROGRESS;
-				robot.moveForward(0.1);
+				robot.moveForward(0.3);
 				moveForwardUntilStopped();
 			}
 			else
+			{
+				System.out.println("Calling reverse to last here");
+				robot.sleep(10);
 				reverseToLast();
+			}
+				
 		}
 		else
+		{
+			System.out.println("Calling reverse to last in second block");
+			System.out.println(e.eventType);
+			robot.sleep(10);
 			reverseToLast();
+		}
+			
 	}
 	
 	public void reverseToLast()
@@ -145,6 +156,7 @@ public class MazeRunner
          if(event.eventType == Event.MOVEMENT)
          {
             reverseMovement(event);
+			robot.turnAround();
          }
          else if(event.eventType == Event.TURN)
          {
@@ -152,7 +164,6 @@ public class MazeRunner
          }
          else
          {
-            robot.turnAround();
             decideNextAction();
             break;
          }

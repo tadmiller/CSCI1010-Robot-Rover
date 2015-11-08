@@ -322,6 +322,7 @@ public class RobotRover
 	}
 	
 	public void turnAround() {
+		moveBackward(0.25);
 		turnLeft();
 		turnLeft();
 	}
