@@ -7,8 +7,8 @@ public class MovementResult
 	// Keeps track of time travelled using the moveForward() method in RobotRover.java
 	public MovementResult(boolean endpoint, boolean wall, double duration)
 	{
-		endpoint = endpoint;
-		duration = duration;
-		wall = wall;
+		this.endpoint = endpoint;
+		this.duration = duration;
+		this.wall = wall;
 	}
 }

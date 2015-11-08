@@ -104,10 +104,11 @@ public class RobotRover
 			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
 		}
-		System.out.println("Travelled: " + distanceTravelled);
-		System.out.println("Wall:" + isWall);
+
 		
-		return new MovementResult(isEndpoint, isWall, distanceTravelled);
+		MovementResult res = new MovementResult(isEndpoint, isWall, distanceTravelled);
+
+		return res;
 	}
 	
 	public void findLine()

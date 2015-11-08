@@ -37,9 +37,7 @@ public class MazeRunner
 		moveEvent.estimatedDistance = result.duration;
 		
 		stack.push(moveEvent);
-		
-		System.out.println("wall:" +result.wall);
-		
+				
 		if (result.wall)
 		{
 			reverseToLast();
