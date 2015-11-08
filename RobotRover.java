@@ -121,7 +121,6 @@ public class RobotRover
 		
 		while (hue > BLACK_MAX || hue < BLACK_MIN)
 		{
-			
 			if (side)
 			{
 				Motor.C.forward();
@@ -140,7 +139,7 @@ public class RobotRover
 					if (hue < BLACK_MAX && hue > BLACK_MIN)
 						break;
 					
-					Thread.sleep(5);
+					Thread.sleep(4);
 				}
 			}
 
