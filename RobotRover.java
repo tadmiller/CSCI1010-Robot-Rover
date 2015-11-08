@@ -64,24 +64,16 @@ public class RobotRover
 	{
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
 		TouchSensor touchSensor = new TouchSensor(SensorPort.S2);
-		
-		colorSensor.setFloodlight(true);
-		
+				
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
 		
 		double distanceTravelled = 0.0;
 		boolean isEndpoint = false;
 		boolean isWall = false;
-		
-		//distanceTravelled += LINE_FORWARD_DURATION;
-		
-		
-		// End program by pressing two middle buttons together
-		while (distanceTravelled < (maxDistance - 1) || maxDistance == -1)
+				
+		while (true)
 		{
-
-			//System.out.println("running");
 			if (touchSensor.isPressed())
 			{
 				System.out.println("Oops, hit a wall");
@@ -105,6 +97,7 @@ public class RobotRover
 				break;
 			}
 			
+<<<<<<< HEAD
 			
 			while (hue > 80 || hue < 60)
 			{
@@ -141,6 +134,14 @@ public class RobotRover
 //				}
 				findLine();
 			//distanceTravelled += LINE_FORWARD_DURATION;
+=======
+			if (hue > 80 || hue < 60) {
+				findLine();
+			}
+			else if (hue > 60 && hue < 80 ) {
+				distanceTravelled += LINE_FORWARD_DURATION;
+				moveForward(LINE_FORWARD_DURATION);
+>>>>>>> origin/master
 			}
 		}
 		System.out.println("Travelled: " + distanceTravelled);
