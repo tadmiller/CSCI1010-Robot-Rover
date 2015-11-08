@@ -148,7 +148,7 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite directio n
+			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 		}
 		
