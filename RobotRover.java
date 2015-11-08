@@ -167,10 +167,7 @@ public class RobotRover
 				
 			}
 			
-			if (side)
-				Motor.C.stop(true);
-			else
-				Motor.B.stop(true);
+			stop();
 			
 			side = !side;
 		}
