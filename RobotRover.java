@@ -134,12 +134,12 @@ public class RobotRover
 			
 			try
 			{
-				for (int j = 0; j < i; j += 10)
+				for (int j = 0; j < i; j += 5)
 				{
 					if (hue < BLACK_MAX && hue > BLACK_MIN)
 						break;
 					
-					Thread.sleep(10);
+					Thread.sleep(4);
 				}
 			}
 
