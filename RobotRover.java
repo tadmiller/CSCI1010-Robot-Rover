@@ -12,6 +12,8 @@ public class RobotRover
 {
 	private final int speed = 300;
 	private final double LINE_FORWARD_DURATION = 0.1;
+	private final int BLACK_MAX = 90;
+	private final int BLACK_MIN = 60;
 
 	// Empty constructor.
 	public RobotRover()
@@ -112,14 +114,14 @@ public class RobotRover
 	{
 		boolean side = true; // left = true right = false
 		double hue = getColorSensorH();
-		int i = 1;
+		double i = 1;
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
 	
 		System.out.println("Looking for the line..");
 		
-		while (hue > 80 || hue < 60)
+		while (hue > 90 || hue < 60)
 		{
 			System.out.println("i: " + i);
 			
@@ -141,7 +143,7 @@ public class RobotRover
 					//if (hue < 80 && hue > 60)
 					//	break;
 					
-					Thread.sleep(i);
+					Thread.sleep((int)i);
 				//}
 			}
 
@@ -150,7 +152,7 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
+			i *= 1.5; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
 			Motor.B.stop(true);
