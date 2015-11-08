@@ -173,6 +173,7 @@ public class RobotRover
 		return getColorSensorHSV()[0];
 	}
 
+	// Credit to Dr. Drumwright for this code
 	public double[] getColorSensorHSV()
 	{
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);
@@ -181,6 +182,7 @@ public class RobotRover
 		
 
 		double[] hsv = new double[3];
+		
 		// read colors
 		int r = colors.getRed();
 		int b = colors.getBlue();
@@ -190,7 +192,8 @@ public class RobotRover
 		double max = Math.max(r, Math.max(b, g));
 		double delta = max - min;
 		hsv[2] = max/255; //set v to max as a percentage
-		if (max != 0){
+		if (max != 0)
+		{
 			hsv[1] = delta/max;
 		}
 		else{ //r = b = g =0 
