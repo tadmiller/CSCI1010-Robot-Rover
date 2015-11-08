@@ -139,7 +139,7 @@ public class RobotRover
 					if (hue < BLACK_MAX && hue > BLACK_MIN)
 						break;
 					
-					Thread.sleep(4);
+					Thread.sleep(10);
 				}
 			}
 
