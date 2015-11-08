@@ -111,7 +111,7 @@ public class RobotRover
 		return res;
 	}
 	
-	public void findLine()
+	public void findLine() // pathfinder
 	{
 		boolean side = true; // left = true right = false
 		double hue = getColorSensorH();
@@ -122,7 +122,6 @@ public class RobotRover
 		
 		while (hue > BLACK_MAX || hue < BLACK_MIN)
 		{
-			
 			if (side)
 			{
 				Motor.C.forward();
@@ -136,12 +135,12 @@ public class RobotRover
 			
 			try
 			{
-				for (int j = 0; j < i; j += 10)
+				for (int j = 0; j < i; j += 5)
 				{
 					if (hue < BLACK_MAX && hue > BLACK_MIN)
 						break;
 					
-					Thread.sleep(5);
+					Thread.sleep(4);
 				}
 			}
 
@@ -150,7 +149,7 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 1.4; // go twice the distance because we need to account for the distance we went in the opposite direction
+			i *= 1.3; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
 			Motor.B.stop(true);
