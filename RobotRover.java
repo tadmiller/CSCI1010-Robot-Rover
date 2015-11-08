@@ -113,6 +113,9 @@ public class RobotRover
 		boolean side = true; // left = true right = false
 		double hue = getColorSensorH();
 		int i = 50;
+		
+		Motor.B.setSpeed(400);
+		Motor.C.setSpeed(400);
 	
 		System.out.println("Looking for the line..");
 		
@@ -148,6 +151,8 @@ public class RobotRover
 			i *= 2;
 			side = !side;
 		}
+		
+		stop();
 	}
 
 	// black is 16 <=
