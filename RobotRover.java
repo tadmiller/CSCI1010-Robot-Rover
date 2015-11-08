@@ -163,16 +163,6 @@ public class RobotRover
 			ColorSensor.Color color = colorSensor.getColor();
 			
 			double hue = getColorSensorH();
-         if (hue > 80 || hue < 60)
-				Motor.B.forward();
-
-			Motor.B.stop(true);
-
-			else if (hue > 60 && hue < 80 )
-				Motor.C.forward();
-
-			Motor.C.stop(true);
-
 			
 			if (hue > 180 && hue < 210) {
 				System.out.println("Blue detected");
@@ -183,6 +173,16 @@ public class RobotRover
 				break;
 			}
 			
+			if (hue > 80 || hue < 60) {
+				 Motor.B.forward();
+				 Motor.B.stop(true);
+			 }
+			else if (hue > 60 && hue < 80 ) {
+				Motor.C.forward();
+				Motor.C.stop(true);
+			}
+
+		
 						
 			//distanceTravelled += LINE_FORWARD_DURATION;
 		}
