@@ -36,6 +36,8 @@ public class MazeRunner
 		
 		moveEvent.estimatedDistance = result.duration;
 		
+		System.out.println("Pushing new movementA");
+		robot.sleep(5);
 		stack.push(moveEvent);
 				
 		if (result.wall)
