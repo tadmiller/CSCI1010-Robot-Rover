@@ -114,8 +114,8 @@ public class RobotRover
 		double hue = getColorSensorH();
 		int i = 1;
 		
-		Motor.B.setSpeed(400);
-		Motor.C.setSpeed(400);
+		Motor.B.setSpeed(200);
+		Motor.C.setSpeed(200);
 	
 		System.out.println("Looking for the line..");
 		
