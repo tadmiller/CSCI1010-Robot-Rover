@@ -37,7 +37,6 @@ public class MazeRunner
 		moveEvent.estimatedDistance = result.duration;
 		
 		System.out.println("Pushing new movementA");
-		robot.sleep(5);
 		stack.push(moveEvent);
 				
 		if (result.wall)
@@ -100,37 +99,33 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
+				robot.moveForward(0.3);
 				makeTurn(Event.LEFT_TURN);
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
-				robot.moveForward(0.3);
-				moveForwardUntilStopped();
-			}
-			else if (e.rightStatus == Event.UNCHECKED)
-			{
-				makeTurn(Event.RIGHT_TURN);
-				e.rightStatus = Event.CHECK_IN_PROGRESS;
-				robot.moveForward(0.3);
 				moveForwardUntilStopped();
 			}
 			else if (e.forwardStatus == Event.UNCHECKED)
 			{
-				e.forwardStatus = Event.CHECK_IN_PROGRESS;
 				robot.moveForward(0.3);
+				e.forwardStatus = Event.CHECK_IN_PROGRESS;
+				moveForwardUntilStopped();
+			}
+			else if (e.rightStatus == Event.UNCHECKED)
+			{
+				robot.moveForward(0.3);
+				makeTurn(Event.RIGHT_TURN);
+				e.rightStatus = Event.CHECK_IN_PROGRESS;
 				moveForwardUntilStopped();
 			}
 			else
 			{
-				System.out.println("Calling reverse to last here");
-				robot.sleep(10);
 				reverseToLast();
 			}
 				
 		}
 		else
 		{
-			System.out.println("Calling reverse to last in second block");
 			System.out.println(e.eventType);
-			robot.sleep(10);
 			reverseToLast();
 		}
 			
@@ -149,6 +144,7 @@ public class MazeRunner
 		// Then, call decideNextAction()
 		
 		System.out.println("reversing");
+		printStack();
 		
 		robot.turnAround();
       
@@ -165,13 +161,12 @@ public class MazeRunner
          }
          else
          {
-			System.out.println("Breaking");
-			robot.sleep(10);
+			stack.push(event);
             break;
          }
       }
 	  
-	  robot.turnAround();
+	  printStack();
 	  decideNextAction();
 	}
 	
@@ -235,5 +230,27 @@ public class MazeRunner
 	protected void reverseMovement(Event moveEvent)
 	{
 		robot.followLineUntilStopped(moveEvent.estimatedDistance);
+	}
+	
+	protected void printStack() {
+		Object[] events = stack.toArray();
+		for (int i = 0; i < events.length; i++)
+		{
+			Event e = (Event)events[i];
+			switch (e.eventType) {
+				case Event.INTERSECTION:
+					System.out.print("I ");
+					break;
+				case Event.TURN: 
+					System.out.print("T ");
+					break;
+				case Event.MOVEMENT:
+					System.out.print("M ");
+					break;
+			}
+		}
+		
+		System.out.println("");
+		robot.sleep(5);
 	}
 }
