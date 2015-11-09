@@ -153,7 +153,7 @@ public class RobotRover
 				while (getColor() != BLACK && j < i)
 				{
 					Thread.sleep(1);
-					j += 6;
+					j += 2;
 				}
 				
 				if (getColor() == BLACK)
