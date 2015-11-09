@@ -8,6 +8,11 @@ public class TestColorSensor
 
 		RobotRover r = new RobotRover();
 
-		//r.testColorSensor();
+		while (true)
+		{
+			if (r.getColor() == 1)
+				System.out.println("Color is black.");
+			if (r.getColor
+		}
 	}
 }
