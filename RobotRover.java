@@ -12,10 +12,10 @@ public class RobotRover
 {
 	private final int speed = 300;
 	private final double LINE_FORWARD_DURATION = 0.1;
-	private final int BLACK = 1;
-	private final int GREY = 2;
-	private final int BLUE = 3;
-	private final int BROWN = 4;
+	public final int BLACK = 1;
+	public final int GREY = 2;
+	public final int BLUE = 3;
+	public final int BROWN = 4;
 
 	// Empty constructor.
 	public RobotRover()
