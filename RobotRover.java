@@ -12,12 +12,29 @@ public class RobotRover
 {
 	private final int speed = 300;
 	private final double LINE_FORWARD_DURATION = 0.1;
-	private final int BLACK_MAX = 90;
-	private final int BLACK_MIN = 60;
+	private final int BLACK = 1;
+	private final int GREY = 2;
+	private final int BLUE = 3;
+	private final int BROWN = 4;
 
 	// Empty constructor.
 	public RobotRover()
 	{
+	}
+
+	public int getColor()
+	{
+		double colors[] = getColorSensorHSV();
+		
+		if (colors[0] > 60 && colors[0] < 90 && colors[1] > 0.6)
+			return BLACK;
+		else if (colors[0] > 60 && colors[0] < 90 && colors[1] <= 0.6)
+			return GREY;
+		else if (colors[0] > 180 && colors[0] < 210)
+			return BLUE;
+			
+		
+		return BROWN;
 	}
 
 	/**
@@ -85,9 +102,7 @@ public class RobotRover
 			
 			ColorSensor.Color color = colorSensor.getColor();
 			
-			double hue = getColorSensorH();
-			
-			if (hue > 180 && hue < 210)
+			if (getColor() == BLUE)
 			{
 				System.out.println("Blue detected");
 				break;
@@ -114,13 +129,13 @@ public class RobotRover
 	public void findLine() // pathfinder
 	{
 		boolean side = true; // left = true right = false
-		double hue = getColorSensorH();
 		double i = 50;
+		int j = 0;
 		
 		Motor.B.setSpeed(200);
 		Motor.C.setSpeed(200);
 		
-		while (hue > BLACK_MAX || hue < BLACK_MIN)
+		while (getColor() != BLACK)
 		{
 			if (side)
 			{
@@ -135,13 +150,21 @@ public class RobotRover
 			
 			try
 			{
-				for (int j = 0; j < i; j += 5)
+				while (getColor() != BLACK && j < i)
 				{
-					if (hue < BLACK_MAX && hue > BLACK_MIN)
-						break;
-					
-					Thread.sleep(4);
+					Thread.sleep(1);
+					j += 2;
 				}
+				
+				if (getColor() == BLACK)
+					break;
+//				for (int j = 0; j < i; j += 2)
+//				{
+//					if (getColor() == BLACK)
+//						break;
+//					
+//					Thread.sleep(2);
+//				}
 			}
 
 			catch(InterruptedException ex)
@@ -149,14 +172,11 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 1.3; // go twice the distance because we need to account for the distance we went in the opposite direction
+			i *= 1.5; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
 			Motor.B.stop(true);
 			Motor.C.stop(true);
-			//stop();
-			
-			hue = getColorSensorH();
 		}
 		
 		stop(); // stop
