@@ -103,7 +103,7 @@ public class RobotRover
 				break;
 			}		
 			
-			boolean shouldMoveLeft = true;
+			/*boolean shouldMoveLeft = true;
 			int degrees = 0;
 			while (getColor() == BROWN)
 			{
@@ -126,7 +126,7 @@ public class RobotRover
 				}
 				
 				shouldMoveLeft = !shouldMoveLeft;
-			}
+			}*/
 			
 			Motor.B.setSpeed(200);
 			Motor.C.setSpeed(200);
@@ -143,6 +143,8 @@ public class RobotRover
 				isEndpoint = true;
 				break;
 			}
+			
+			findLine();
 			
 			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
