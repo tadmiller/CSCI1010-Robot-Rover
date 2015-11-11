@@ -179,7 +179,7 @@ public class RobotRover
 			Motor.C.stop(true);
 		}
 		
-		sleep(0.2);
+		sleep(0.25);
 		stop(); // stop
 	}
 
