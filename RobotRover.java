@@ -172,13 +172,14 @@ public class RobotRover
 				Thread.currentThread().interrupt();
 			}
 			
-			i *= 1.5; // go twice the distance because we need to account for the distance we went in the opposite direction
+			i *= 1.25; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
 			Motor.B.stop(true);
 			Motor.C.stop(true);
 		}
 		
+		sleep(0.1);
 		stop(); // stop
 	}
 
