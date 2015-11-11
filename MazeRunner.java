@@ -36,7 +36,7 @@ public class MazeRunner
 		
 		moveEvent.estimatedDistance = result.duration;
 		
-		if (result.duration <= RobotRover.LINE_FORWARD_DURATION * 2) {
+		if (result.duration <= robot.LINE_FORWARD_DURATION * 2) {
 				robot.moveBackward(0.25);
 				decideNextAction();
 				return;
