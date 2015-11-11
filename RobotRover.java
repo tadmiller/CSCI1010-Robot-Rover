@@ -194,8 +194,7 @@ public class RobotRover
 		}
 		sleep(0.075);
 		
-		Motor.B.stop(true);
-		Motor.C.stop(true);
+		stop();
 	}
 
 	// black is 16 <=
