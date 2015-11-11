@@ -192,7 +192,7 @@ public class RobotRover
 			Motor.C.backward();
 			Motor.B.forward();
 		}
-		sleep(0.25);
+		sleep(0.1);
 		
 		Motor.B.stop(true);
 		Motor.C.stop(true);
