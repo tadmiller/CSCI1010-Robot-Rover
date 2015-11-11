@@ -129,7 +129,8 @@ public class RobotRover
 	public void findLine() // pathfinder
 	{
 		boolean side = true; // left = true right = false
-		double i = 50;
+		int currentDegrees = 0;
+		int i = 10;
 		int j = 0;
 		
 		Motor.B.setSpeed(200);
@@ -137,62 +138,33 @@ public class RobotRover
 		
 		while (getColor() != BLACK)
 		{
-			if (side)
+			while (getColor() != BLACK && j < i)
 			{
-				Motor.C.forward();
-				Motor.B.backward();
-			}
-			else
-			{
-				Motor.C.backward();
-				Motor.B.forward();
-			}
-			
-			try
-			{
-				while (getColor() != BLACK && j < i)
+				if (side)
 				{
-					Thread.sleep(1);
-					j += 2;
+					currentDegrees--;
+					Motor.B.rotate(1, true);
+					Motor.C.rotate(-1, true);
 				}
-				
+				else
+				{
+					Motor.B.rotate(-1, true);
+					Motor.C.rotate(1, true);
+					currentDegrees++;
+				}
+					
 				if (getColor() == BLACK)
 					break;
-//				for (int j = 0; j < i; j += 2)
-//				{
-//					if (getColor() == BLACK)
-//						break;
-//					
-//					Thread.sleep(2);
-//				}
-			}
 
-			catch(InterruptedException ex)
-			{
-				Thread.currentThread().interrupt();
+				j++;
 			}
+				
+			if (getColor() == BLACK)
+				break;
 			
-			i *= 1.5; // go twice the distance because we need to account for the distance we went in the opposite direction
-			
-			if (getColor() != BLACK)
-			{
-				Motor.B.stop(true);
-				Motor.C.stop(true);
-				side = !side; // change the side we scan on
-			}
+			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
+			side = !side; // change the side we scan on
 		}
-		
-		if (side)
-		{
-			Motor.C.forward();
-			Motor.B.backward();
-		}
-		else
-		{
-			Motor.C.backward();
-			Motor.B.forward();
-		}
-		sleep(0.11);
 		
 		stop();
 	}
