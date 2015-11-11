@@ -173,12 +173,12 @@ public class RobotRover
 			}
 			
 			i *= 1.5; // go twice the distance because we need to account for the distance we went in the opposite direction
-			side = !side; // change the side we scan on
 			
 			if (getColor() != BLACK)
 			{
 				Motor.B.stop(true);
 				Motor.C.stop(true);
+				side = !side; // change the side we scan on
 			}
 		}
 		
@@ -192,7 +192,7 @@ public class RobotRover
 			Motor.C.backward();
 			Motor.B.forward();
 		}
-		sleep(0.1);
+		sleep(0.075);
 		
 		Motor.B.stop(true);
 		Motor.C.stop(true);
