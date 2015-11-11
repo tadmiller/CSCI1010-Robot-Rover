@@ -26,7 +26,7 @@ public class RobotRover
 	{
 		double colors[] = getColorSensorHSV();
 		
-		if (colors[0] > 330 && colors[0] < 360)
+		if (colors[0] > 320 && colors[0] < 380)
 			return BLACK;
 		else if (colors[0] > 260 && colors[0] < 280 && colors[2] >= 0.5)
 			return GREY;
@@ -90,6 +90,9 @@ public class RobotRover
 		double distanceTravelled = 0.0;
 		boolean isEndpoint = false;
 		boolean isWall = false;
+		
+		distanceTravelled += LINE_FORWARD_DURATION;
+		moveForward(LINE_FORWARD_DURATION);
 				
 		while (true)
 		{
@@ -100,22 +103,47 @@ public class RobotRover
 				break;
 			}		
 			
-			ColorSensor.Color color = colorSensor.getColor();
+			boolean shouldMoveLeft = true;
+			int degrees = 0;
+			while (getColor() == BROWN)
+			{
+				Motor.B.setSpeed(100);
+				Motor.C.setSpeed(100);
+				degrees += 5;
+				for (int i = degrees; i > 0; i -= 5)
+				{
+					if (shouldMoveLeft) {
+						Motor.B.rotate(degrees, true);
+						Motor.C.rotate(-degrees, false);
+					} else {
+						Motor.C.rotate(degrees, true);
+						Motor.B.rotate(-degrees, false);
+					}
+					
+					if (getColor() != BROWN) {
+						break;
+					}
+				}
+				
+				shouldMoveLeft = !shouldMoveLeft;
+			}
+			
+			Motor.B.setSpeed(200);
+			Motor.C.setSpeed(200);
 			
 			if (getColor() == BLUE)
 			{
 				System.out.println("Blue detected");
 				break;
 			}
-			else if (false)
+			else if (getColor() == GREY)
 			{
+				System.out.println("Grey detected");
 				// Should be changed to look for endpoint color
 				isEndpoint = true;
 				break;
 			}
 			
-			findLine();
-
 			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
 		}
@@ -360,5 +388,6 @@ public class RobotRover
 		moveBackward(0.25);
 		turnLeft();
 		turnLeft();
+		moveBackward(0.25);
 	}
 }

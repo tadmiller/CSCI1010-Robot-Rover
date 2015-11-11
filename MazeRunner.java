@@ -70,7 +70,7 @@ public class MazeRunner
 		int distance=sonic.getDistance();
 		Event ultraEvent;
 		System.out.println("Distance: "+distance);
-		if(distance > 8 && distance <13) 
+		if(distance > 5 && distance < 13) 
 		{
 			ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
 			System.out.println("Wall detected");
@@ -105,8 +105,8 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
-				robot.moveForward(0.3);
 				makeTurn(Event.LEFT_TURN);
+				robot.moveForward(0.3);
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
 				moveForwardUntilStopped();
 			}
@@ -118,8 +118,8 @@ public class MazeRunner
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
-				robot.moveForward(0.3);
 				makeTurn(Event.RIGHT_TURN);
+				robot.moveForward(0.3);
 				e.rightStatus = Event.CHECK_IN_PROGRESS;
 				moveForwardUntilStopped();
 			}
@@ -138,7 +138,8 @@ public class MazeRunner
 	}
 	
 	public void reverseToLast()
-	{
+      
+      {
 		// Reverse the stack so that you arrive at the last intersection
 		
 		// Use movement data to estimate where it is going to be
@@ -159,7 +160,9 @@ public class MazeRunner
          Event event = (Event) stack.pop();
          if(event.eventType == Event.MOVEMENT)
          {
-            reverseMovement(event);
+            reverseMovement(event, false);
+			Event e2 = (Event)stack.peek();
+			if (e2.eventType == Event.INTERSECTION) robot.turnAround();
          }
          else if(event.eventType == Event.TURN)
          {
@@ -179,8 +182,23 @@ public class MazeRunner
 	// Reverse the stack to return to the start
 	public void reverseAll()
 	{
+		robot.turnAround();
+		robot.moveForward(0.5);
 		while (!stack.isEmpty())
-			reverseToLast();
+		{
+			Event e = (Event)stack.pop();
+			if (e.eventType == Event.MOVEMENT)
+			{
+				reverseMovement(e, false);
+			}
+			else if (e.eventType == Event.TURN)
+			{
+				reverseTurn(e, true);
+			}
+		}
+		
+		System.out.println("Mission complete");
+		robot.sleep(10);
 	}
 	
 
@@ -233,9 +251,10 @@ public class MazeRunner
 	}
 	
 	// Use the estimate from the event to get a general distance
-	protected void reverseMovement(Event moveEvent)
+	protected void reverseMovement(Event moveEvent, boolean andTurnAround)
 	{
 		robot.followLineUntilStopped(moveEvent.estimatedDistance);
+		if (andTurnAround) robot.turnAround();
 	}
 	
 	protected void printStack() {
