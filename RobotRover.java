@@ -11,7 +11,7 @@ import lejos.nxt.*;
 public class RobotRover
 {
 	private final int speed = 300;
-	private final double LINE_FORWARD_DURATION = 0.1;
+	public final double LINE_FORWARD_DURATION = 0.1;
 	public final int BLACK = 1;
 	public final int GREY = 2;
 	public final int BLUE = 3;
