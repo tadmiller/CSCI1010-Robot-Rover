@@ -183,7 +183,7 @@ public class MazeRunner
 	public void reverseAll()
 	{
 		robot.turnAround();
-		robot.moveForward(0.5);
+		robot.moveForward(0.75);
 		while (!stack.isEmpty())
 		{
 			Event e = (Event)stack.pop();
