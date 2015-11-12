@@ -194,6 +194,13 @@ public class RobotRover
 			
 			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
+			
+			if (currentDegrees >= 90) // if we're making left turns then we should move forward a bit and then reset and try again
+			{
+				moveForward(0.4);
+				currentDegrees = 0;
+				i = 10;
+			}
 		}
 		
 		stop();
