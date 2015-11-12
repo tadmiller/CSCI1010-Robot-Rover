@@ -26,9 +26,9 @@ public class RobotRover
 	{
 		double colors[] = getColorSensorHSV();
 		
-		if (colors[0] > 320 && colors[0] < 380 & colors[1] > 0.12)
+		if (colors[0] > 320 && colors[0] < 380) //& colors[1] > 0.2)
 			return BLACK;
-		else if (colors[0] > 240 && colors[0] < 280 && colors[2] <= 0.12)
+		else if (colors[0] > 240 && colors[0] < 280) // && colors[2] <= 0.2)
 			return GREY;
 		else if (colors[0] > 200 && colors[0] < 220)
 			return BLUE;
