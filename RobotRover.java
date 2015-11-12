@@ -197,7 +197,7 @@ public class RobotRover
 			
 			if (currentDegrees >= 90) // if we're making left turns then we should move forward a bit and then reset and try again
 			{
-				moveForward(0.4);
+				moveForward(0.2);
 				currentDegrees = 0;
 				i = 10;
 			}
