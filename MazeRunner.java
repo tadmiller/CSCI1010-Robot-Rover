@@ -105,6 +105,7 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
+				robot.moveForward(0.15);
 				makeTurn(Event.LEFT_TURN);
 				robot.moveForward(0.3);
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
@@ -118,6 +119,7 @@ public class MazeRunner
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
+				robot.moveForward(0.15);
 				makeTurn(Event.RIGHT_TURN);
 				robot.moveForward(0.3);
 				e.rightStatus = Event.CHECK_IN_PROGRESS;

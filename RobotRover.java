@@ -199,8 +199,8 @@ public class RobotRover
 			
 			if (currentDegrees >= 150) // if we're making left turns then we should move forward a bit and then reset and try again
 			{
-				Motor.B.rotate(currentDegrees, true);
-				Motor.C.rotate(-(currentDegrees), false);
+				Motor.B.rotate(currentDegrees - 15, true);
+				Motor.C.rotate(-(currentDegrees - 15), false);
 				moveBackward(0.15);
 				currentDegrees = 0;
 				i = 10;
