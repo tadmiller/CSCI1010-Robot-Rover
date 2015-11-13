@@ -175,7 +175,7 @@ public class RobotRover
 			{
 				if (side)
 				{
-					currentDegrees--;
+					currentDegrees += 2;
 					Motor.B.rotate(2, true);
 					Motor.C.rotate(-2, true);
 				}
@@ -183,7 +183,7 @@ public class RobotRover
 				{
 					Motor.B.rotate(-2, true);
 					Motor.C.rotate(2, true);
-					currentDegrees++;
+					currentDegrees += 2;
 				}
 					
 				if (getColor() == BLACK)
