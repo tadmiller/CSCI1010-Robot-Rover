@@ -183,7 +183,7 @@ public class RobotRover
 				{
 					Motor.B.rotate(-2, true);
 					Motor.C.rotate(2, true);
-					currentDegrees += 2;
+					currentDegrees -= 2;
 				}
 					
 				if (getColor() == BLACK)
@@ -200,7 +200,7 @@ public class RobotRover
 			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
-			if (currentDegrees >= 160) // if we're making left turns then we should move forward a bit and then reset and try again
+			if (currentDegrees >= 170) // if we're making left turns then we should move forward a bit and then reset and try again
 			{
 				Motor.B.rotate(currentDegrees - 15, true);
 				Motor.C.rotate(-(currentDegrees - 15), false);
