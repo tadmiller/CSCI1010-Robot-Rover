@@ -128,9 +128,6 @@ public class RobotRover
 				shouldMoveLeft = !shouldMoveLeft;
 			}*/
 			
-			Motor.B.setSpeed(200);
-			Motor.C.setSpeed(200);
-			
 			if (getColor() == BLUE)
 			{
 				System.out.println("Blue detected");
@@ -145,6 +142,9 @@ public class RobotRover
 			}
 			
 			findLine();
+			
+			Motor.B.setSpeed(200);
+			Motor.C.setSpeed(200);
 			
 			distanceTravelled += LINE_FORWARD_DURATION;
 			moveForward(LINE_FORWARD_DURATION);
