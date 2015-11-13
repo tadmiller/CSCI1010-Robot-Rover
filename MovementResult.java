@@ -1,3 +1,5 @@
+/** This is basically just a way to get around the fact that Java does not allow you to return multiple values from a function. **/
+
 public class MovementResult
 {	
 	public boolean endpoint;

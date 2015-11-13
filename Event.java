@@ -1,3 +1,6 @@
+/** A class to contain all of the possible events that could occur while running the maze
+ **/
+
 public class Event
     {
     
@@ -17,23 +20,28 @@ public class Event
     public static final int RIGHT_TURN = 4;
     
     // General event type variable
+    // Denotes whether an event is a turn, intersection, or movement
     public int eventType;
     
     // Intersection data
+    // Whether or not a wall is known to be a failed direction or not
     public int leftStatus;
     public int rightStatus;
     public int forwardStatus;
     
-    // Turn data
+    // Turn-specific data
     public int turnType;
     
-    // Movement data
+    // Movement-specific data
     public double estimatedDistance;
 
+
+    // Constructor
     public Event()
     {
     }
 
+    // Basic methods for testing event type
     public boolean isIntersection()
     {
         return eventType == INTERSECTION;
@@ -49,6 +57,7 @@ public class Event
         return eventType == MOVEMENT;
     }
     
+    // A method that returns a new intersection with given statuses in each direction
     public static Event newIntersection(int left, int front, int right)
     {
         Event e = new Event();
@@ -62,11 +71,13 @@ public class Event
     }
     
     // New intersection with only left side
+    // Normally the left side is all the data we start with
     public static Event newIntersection(int left) 
     {
         return Event.newIntersection(left, UNCHECKED, UNCHECKED);
     }
     
+    // Make a turn event in a given direction
     public static Event newTurn(int direction) 
     {
         Event e = new Event();
@@ -77,6 +88,7 @@ public class Event
         return e;
     }
     
+    // Make a movement event with a given distance
     public static Event newMovement(int distance)
     {
         Event e = new Event();
