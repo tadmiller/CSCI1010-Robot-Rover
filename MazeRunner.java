@@ -37,7 +37,7 @@ public class MazeRunner
 		moveEvent.estimatedDistance = result.duration;
 		
 		if (result.duration <= robot.LINE_FORWARD_DURATION * 2) {
-				robot.moveBackward(0.25);
+				robot.moveBackward(0.15);
 				decideNextAction();
 				return;
 		}
@@ -105,7 +105,7 @@ public class MazeRunner
 		{
 			if (e.leftStatus == Event.UNCHECKED)
 			{
-				robot.moveForward(0.15);
+				robot.moveForward(0.2);
 				makeTurn(Event.LEFT_TURN);
 				robot.moveForward(0.3);
 				e.leftStatus = Event.CHECK_IN_PROGRESS;
@@ -119,7 +119,7 @@ public class MazeRunner
 			}
 			else if (e.rightStatus == Event.UNCHECKED)
 			{
-				robot.moveForward(0.15);
+				robot.moveBackward(0.2);
 				makeTurn(Event.RIGHT_TURN);
 				robot.moveForward(0.3);
 				e.rightStatus = Event.CHECK_IN_PROGRESS;
@@ -235,9 +235,11 @@ public class MazeRunner
       
       if(andTurnAround){
          if(turnEvent.turnType == Event.LEFT_TURN){
+			robot.moveBackward(0.2);
             robot.turnRight();
          }
          else{
+			robot.moveForward(0.2);
             robot.turnLeft();
          }
       }

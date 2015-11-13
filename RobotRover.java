@@ -171,7 +171,7 @@ public class RobotRover
 			Motor.B.setSpeed(400);
 			Motor.C.setSpeed(400);
 			
-			while (getColor() != BLACK && j < (i / 2))
+			while (getColor() != BLACK && j < i) //&& currentDegrees < 90 && currentDegrees > -90)
 			{
 				if (side)
 				{
@@ -192,6 +192,8 @@ public class RobotRover
 					break;
 
 				j++;
+				Motor.B.stop(true);
+				Motor.C.stop(true);
 			}
 				
 			if (getColor() == BLACK)
@@ -200,17 +202,38 @@ public class RobotRover
 			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
-			if (currentDegrees >= 160) // if we're making left turns then we should move forward a bit and then reset and try again
+			if (currentDegrees >= 180) // if we're making left turns then we should move forward a bit and then reset and try again
 			{
 				Motor.B.rotate(currentDegrees - 15, true);
 				Motor.C.rotate(-(currentDegrees - 15), false);
-				moveBackward(0.15);
+				moveBackward(0.2);
 				currentDegrees = 0;
-				i = 10;
+				i = 20;
+				j = 0;
+			}
+			else if (currentDegrees <= -180) // if we're making left turns then we should move forward a bit and then reset and try again
+			{
+				Motor.C.rotate(currentDegrees - 15, true);
+				Motor.B.rotate(-(currentDegrees - 15), false);
+				moveBackward(0.2);
+				currentDegrees = 0;
+				i = 20;
 				j = 0;
 			}
 		}
 		
+		if (side)
+				{
+					Motor.B.rotate(-3, true);
+					Motor.C.rotate(3, true);
+				}
+				else
+				{
+					Motor.B.rotate(3, true);
+					Motor.C.rotate(-3, true);
+				}
+		
+		System.out.println("Stopping findLine");
 		stop();
 	}
 
