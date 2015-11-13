@@ -1,3 +1,11 @@
+/*******************************************************************
+* @authors Theodore Miller, Danny Nsouli, Nathan Walker, Sam Hanna *
+********************************************************************
+*
+* This program tests the color sensor methods.
+*
+*/
+
 import lejos.nxt.*;
 
 public class TestColorSensor

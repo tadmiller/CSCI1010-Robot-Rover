@@ -17,11 +17,22 @@ public class RobotRover
 	public final int BLUE = 3;
 	public final int BROWN = 4;
 
-	// Empty constructor.
+	/**
+	 * Empty constructor. (Should be a static class)
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public RobotRover()
 	{
 	}
 
+	/**
+	 * Returns the color that the robot has detected.
+	 * 
+	 * @param void
+	 * @return A color value, either black grey blue or brown (integer).
+	 */
 	public int getColor()
 	{
 		double colors[] = getColorSensorHSV();
@@ -101,32 +112,7 @@ public class RobotRover
 				System.out.println("Oops, hit a wall");
 				isWall = true;
 				break;
-			}		
-			
-			/*boolean shouldMoveLeft = true;
-			int degrees = 0;
-			while (getColor() == BROWN)
-			{
-				Motor.B.setSpeed(100);
-				Motor.C.setSpeed(100);
-				degrees += 5;
-				for (int i = degrees; i > 0; i -= 5)
-				{
-					if (shouldMoveLeft) {
-						Motor.B.rotate(degrees, true);
-						Motor.C.rotate(-degrees, false);
-					} else {
-						Motor.C.rotate(degrees, true);
-						Motor.B.rotate(-degrees, false);
-					}
-					
-					if (getColor() != BROWN) {
-						break;
-					}
-				}
-				
-				shouldMoveLeft = !shouldMoveLeft;
-			}*/
+			}
 			
 			if (getColor() == BLUE)
 			{
@@ -156,6 +142,12 @@ public class RobotRover
 		return res;
 	}
 	
+	/**
+	 * Looks for the line and sets the robot on it.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public void findLine() // pathfinder
 	{
 		boolean side = true; // left = true right = false
@@ -166,32 +158,38 @@ public class RobotRover
 		Motor.B.setSpeed(400);
 		Motor.C.setSpeed(400);
 		
+		// While the color isn't black, we scan for it.
 		while (getColor() != BLACK)
 		{
 			Motor.B.setSpeed(400);
 			Motor.C.setSpeed(400);
 			
+			// These two loops are essentially nested for loops; however we are always checking to see if we are on the line.
 			while (getColor() != BLACK && j < i) //&& currentDegrees < 90 && currentDegrees > -90)
 			{
+				// If we are on the left side..
 				if (side)
-				{
+				{	// Rotate right.
 					currentDegrees++;
 					Motor.B.rotate(2, true);
 					Motor.C.rotate(-2, true);
-				}
+				} // If we are on the right side (base case).
 				else
-				{
+				{	// Rotate left.
 					Motor.B.rotate(-2, true);
 					Motor.C.rotate(2, true);
 					currentDegrees--;
 				}
-					
+				
+				// Check to see if we are on black.
 				if (getColor() == BLACK)
 					break;
 				else if (getColor() == GREY)
 					break;
-
+				
+				// J is our inner iterator. We use this to keep track of the distance gone.
 				j++;
+				// Stop the motor at the end.
 				Motor.B.stop(true);
 				Motor.C.stop(true);
 			}
@@ -222,18 +220,19 @@ public class RobotRover
 			}
 		}
 		
+		// If we found the line, we rotate a little bit to try to center ourselves.
 		if (side)
-				{
-					Motor.B.rotate(-3, true);
-					Motor.C.rotate(3, true);
-				}
-				else
-				{
-					Motor.B.rotate(3, true);
-					Motor.C.rotate(-3, true);
-				}
+		{
+			Motor.B.rotate(-3, true);
+			Motor.C.rotate(3, true);
+		}
+		else
+		{
+			Motor.B.rotate(3, true);
+			Motor.C.rotate(-3, true);
+		}
 		
-		System.out.println("Stopping findLine");
+		// Stop the robot.
 		stop();
 	}
 
@@ -245,7 +244,7 @@ public class RobotRover
 		return getColorSensorHSV()[0];
 	}
 
-	// Credit to Dr. Drumwright for this code
+	// Credit to Dr. Drumwright & Dr. Roxana for this code
 	public double[] getColorSensorHSV()
 	{
 		ColorSensor colorSensor = new ColorSensor(SensorPort.S1);

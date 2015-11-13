@@ -1,25 +1,53 @@
-import java.util.Stack;
+import java.util.Stack; // http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
 import lejos.nxt.*;
-// http://www.lejos.org/nxt/nxj/api/java/util/Stack.html
+
+/*******************************************************************
+* @authors Theodore Miller, Danny Nsouli, Nathan Walker, Sam Hanna *
+********************************************************************
+*
+* This program contains all of the methods to navigate the
+* maze using the RobotRover.java class.
+*
+*/
 
 public class MazeRunner
 {
-	
+	// Stack to store the movement events.
 	Stack stack;
+	
+	// RobotRover object.
 	RobotRover robot;
 	
+	/**
+	 * Constructor. Creates a new stack and robot rover object.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public MazeRunner()
 	{
 		stack = new Stack();
 		robot = new RobotRover();
 	}
 	
+	/**
+	 * Main method. Starts the robot.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public static void main(String[] args)
 	{
 		MazeRunner m = new MazeRunner();
 		m.decideNextAction();
 	}
 	
+	/**
+	 * Moving method. Moves forward until we hit the wall.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public void moveForwardUntilStopped()
 	{
 		// Create a movement event, add to stack
@@ -36,7 +64,9 @@ public class MazeRunner
 		
 		moveEvent.estimatedDistance = result.duration;
 		
-		if (result.duration <= robot.LINE_FORWARD_DURATION * 2) {
+		// If we're at a T intersection, we won't bother moving forward and instead call decideNextAction().
+		if (result.duration <= robot.LINE_FORWARD_DURATION * 2)
+		{
 				robot.moveBackward(0.15);
 				decideNextAction();
 				return;
@@ -44,21 +74,28 @@ public class MazeRunner
 		
 		System.out.println("Pushing new movementA");
 		stack.push(moveEvent);
-				
+		
+		// If we hit a wall, call reverseToLast() to back up.
 		if (result.wall)
 		{
 			reverseToLast();
 		}
-		else if (result.endpoint)
+		else if (result.endpoint) // If we're at the end, reverse the stack.
 		{
 			reverseAll();
 		}
-		else {
+		else // The base case is an intersection. We process the intersection and push it onto the stack.
+		{
 			System.out.println("Going to process new intersection");
 			processNewIntersection();
 		}
 	}
-	
+	/**
+	 * Process' an intersection. This will push it onto the stack and remember which direction we went.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public void processNewIntersection()
 	{
 		// Read ultrasonic sensor to get whether or not
@@ -70,6 +107,8 @@ public class MazeRunner
 		int distance=sonic.getDistance();
 		Event ultraEvent;
 		System.out.println("Distance: "+distance);
+		
+		// Use UltraSonic sensor to determine which side the intersection is on.
 		if(distance > 5 && distance < 13) 
 		{
 			ultraEvent = Event.newIntersection(Event.WALL_DETECTED);
@@ -78,6 +117,7 @@ public class MazeRunner
 		else
 			ultraEvent = Event.newIntersection(Event.UNCHECKED);
 
+		// Push the event onto the stack.
 		stack.push(ultraEvent);
 		System.out.println("New intersection made" + ultraEvent.leftStatus + "" + ultraEvent.eventType);
 		decideNextAction();
@@ -181,7 +221,13 @@ public class MazeRunner
 	  decideNextAction();
 	}
 	
-	// Reverse the stack to return to the start
+	
+	/**
+	 * 	Reverse the stack to return to the start
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	public void reverseAll()
 	{
 		robot.turnAround();
@@ -203,8 +249,12 @@ public class MazeRunner
 		robot.sleep(10);
 	}
 	
-
-	
+	/**
+	 * Turns the robot either left or right.
+	 * 
+	 * @param Direction; 1 or -1
+	 * @return null
+	 */
 	public void makeTurn(int direction)
 	{
 		// Make a turn in the given direction
@@ -228,6 +278,12 @@ public class MazeRunner
         }
 	}
 	
+	/**
+	 * Reverse the turn when we come back from the stack.
+	 * 
+	 * @param Event containing turn information & true or false telling the robot to turn around or not.
+	 * @return null
+	 */
 	protected void reverseTurn(Event turnEvent, boolean andTurnAround)
 	{
 		// If standard, just turn in the same direction as the turn was
@@ -254,13 +310,24 @@ public class MazeRunner
       }
 	}
 	
-	// Use the estimate from the event to get a general distance
+	/**
+	 * Use the estimate from the event to get a general distance
+	 * 
+	 * @param Event containing distance forward, boolean
+	 * @return null
+	 */
 	protected void reverseMovement(Event moveEvent, boolean andTurnAround)
 	{
 		robot.followLineUntilStopped(moveEvent.estimatedDistance);
 		if (andTurnAround) robot.turnAround();
 	}
 	
+	/**
+	 * Print out the events on the stack.
+	 * 
+	 * @param void
+	 * @return null
+	 */
 	protected void printStack() {
 		Object[] events = stack.toArray();
 		for (int i = 0; i < events.length; i++)
