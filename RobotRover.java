@@ -160,11 +160,11 @@ public class RobotRover
 	{
 		boolean side = true; // left = true right = false
 		int currentDegrees = 0;
-		int i = 10;
+		int i = 20;
 		int j = 0;
 		
-		Motor.B.setSpeed(200);
-		Motor.C.setSpeed(200);
+		Motor.B.setSpeed(250);
+		Motor.C.setSpeed(250);
 		
 		while (getColor() != BLACK)
 		{
