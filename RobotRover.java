@@ -26,7 +26,7 @@ public class RobotRover
 	{
 		double colors[] = getColorSensorHSV();
 		
-		if (colors[0] > 320 && colors[0] < 380) //& colors[1] > 0.2)
+		if (colors[0] >= 280 && colors[0] < 380) //& colors[1] > 0.2)
 			return BLACK;
 		else if (colors[0] > 240 && colors[0] < 280) // && colors[2] <= 0.2)
 			return GREY;
@@ -168,8 +168,9 @@ public class RobotRover
 		
 		while (getColor() != BLACK)
 		{
-			Motor.B.setSpeed(200);
-			Motor.C.setSpeed(200);
+			Motor.B.setSpeed(250);
+			Motor.C.setSpeed(250);
+			
 			while (getColor() != BLACK && j < i)
 			{
 				if (side)
@@ -188,7 +189,7 @@ public class RobotRover
 				if (getColor() == BLACK)
 					break;
 				else if (getColor() == GREY)
-					System.exit(0);
+					break;
 
 				j++;
 			}
@@ -199,7 +200,7 @@ public class RobotRover
 			i *= 2; // go twice the distance because we need to account for the distance we went in the opposite direction
 			side = !side; // change the side we scan on
 			
-			if (currentDegrees >= 150) // if we're making left turns then we should move forward a bit and then reset and try again
+			if (currentDegrees >= 160) // if we're making left turns then we should move forward a bit and then reset and try again
 			{
 				Motor.B.rotate(currentDegrees - 15, true);
 				Motor.C.rotate(-(currentDegrees - 15), false);
