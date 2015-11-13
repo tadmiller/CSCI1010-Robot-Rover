@@ -280,6 +280,6 @@ public class MazeRunner
 		}
 		
 		System.out.println("");
-		robot.sleep(5);
+		robot.sleep(2);
 	}
 }
