@@ -188,7 +188,7 @@ public class RobotRover
 				if (getColor() == BLACK)
 					break;
 				else if (getColor() == GREY)
-					System.exit(0);
+					break;
 
 				j++;
 			}
