@@ -163,26 +163,26 @@ public class RobotRover
 		int i = 20;
 		int j = 0;
 		
-		Motor.B.setSpeed(250);
-		Motor.C.setSpeed(250);
+		Motor.B.setSpeed(400);
+		Motor.C.setSpeed(400);
 		
 		while (getColor() != BLACK)
 		{
-			Motor.B.setSpeed(250);
-			Motor.C.setSpeed(250);
+			Motor.B.setSpeed(400);
+			Motor.C.setSpeed(400);
 			
-			while (getColor() != BLACK && j < i)
+			while (getColor() != BLACK && j < (i / 2))
 			{
 				if (side)
 				{
 					currentDegrees--;
-					Motor.B.rotate(1, true);
-					Motor.C.rotate(-1, true);
+					Motor.B.rotate(2, true);
+					Motor.C.rotate(-2, true);
 				}
 				else
 				{
-					Motor.B.rotate(-1, true);
-					Motor.C.rotate(1, true);
+					Motor.B.rotate(-2, true);
+					Motor.C.rotate(2, true);
 					currentDegrees++;
 				}
 					
