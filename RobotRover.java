@@ -28,7 +28,7 @@ public class RobotRover
 		
 		if (colors[0] >= 280 && colors[0] < 380) //& colors[1] > 0.2)
 			return BLACK;
-		else if (colors[0] > 240 && colors[0] < 280) // && colors[2] <= 0.2)
+		else if (colors[0] > 240 && colors[0] < 280 && colors[2] > 0.6) // && colors[2] <= 0.2)
 			return GREY;
 		else if (colors[0] > 200 && colors[0] < 220)
 			return BLUE;

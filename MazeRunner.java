@@ -235,7 +235,7 @@ public class MazeRunner
       
       if(andTurnAround){
          if(turnEvent.turnType == Event.LEFT_TURN){
-			robot.moveBackward(0.2);
+			robot.moveForward(0.2);
             robot.turnRight();
          }
          else{
